@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Crypto Term Project</title>
+      <link href="/post/2e35672.html"/>
+      <url>/post/2e35672.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="密码学大作业记录-报告、指北"><a href="#密码学大作业记录-报告、指北" class="headerlink" title="密码学大作业记录(报告、指北)"></a>密码学大作业记录(报告、指北)</h1><h2 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h2><p>设计一个保密通信的协议，具体要求为：利用RSA公钥密码算法，为双方分配一个 AES算法的会话密钥，然后利用AES加密算法和分配的会话密钥，加解密传送的信息。</p><p>假设条件：假设通讯双方为A和B，并假设发方拥有自己的RSA公钥PKA和私钥SKA ，同时收方拥有自己的RSA公钥PKB和私钥SKB ，同时收发双方已经通过某种方式知道了双方的公钥。</p><p>大作业的要求：</p><ol><li>作业需要先设计出保密通讯协议的过程和具体步骤；</li><li>分别编写A，B两个用户端的程序，写清楚两个程序分别要完成的功能，并能够在两个程序间进行通讯；</li><li>对AES加密的保密信息，要求采用CBC模式进行加密；</li><li>大作业的提交方式同实验报告的提交，也就是说既要提交程序实现的说明文档，也要提交源代码和可执行程序。</li></ol><p>占总成绩的70%</p><h2 id="预备工作"><a href="#预备工作" class="headerlink" title="预备工作"></a>预备工作</h2><p>首先，你需要准备如下实验的代码，然后准备缝合：</p><ol><li>计网的实验一，socket双人聊天</li><li>AES代码</li><li>RSA代码</li></ol><p><em>ps: 如果你计网的实验一写的是多人聊天或者聊天室，恭喜你，写麻烦了，缝不进来</em></p><h2 id="过程讲解"><a href="#过程讲解" class="headerlink" title="过程讲解"></a>过程讲解</h2><h3 id="socket双人聊天"><a href="#socket双人聊天" class="headerlink" title="socket双人聊天"></a>socket双人聊天</h3><p>这一步就是计网lab1，关于原理、过程、代码细节不会的可以去看<a href="https://tephrocactushc.github.io/post/16eec244.html">我的计网实验一的blog</a>。已经会了的可以直接跳过。 </p><h3 id="AES代码"><a href="#AES代码" class="headerlink" title="AES代码"></a>AES代码</h3><p>可以使用赵梓杰的代码，但是小问题在于这份代码只能加密数字，无法直接处理字符串，因此需要自己添加字符串转换和补全的内容。</p><p>不过由于要求是CBC模式，因此需要去git上自己找一个写下来。</p><h3 id="RSA代码"><a href="#RSA代码" class="headerlink" title="RSA代码"></a>RSA代码</h3><p>考虑到大多数人都是抄袭的16级信安法巨神周子祎流传下来的代码（赵梓杰抄的那份），那希望大家看懂，原理去看他们的报告即可。</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>唯一需要自己写的地方在于，密码算法大多数只能处理数值，因此需要自己写一些字符串和数值转化的函数。</p><h3 id="协议设计"><a href="#协议设计" class="headerlink" title="协议设计"></a>协议设计</h3><p>就是用对方的RSA公钥加密自己的AES密钥，再用AES密钥加密消息，然后发送出去。<br>接收方用自己的RSA私钥解密，得到对方的AES密钥，然后用这个AES密钥来解密。</p><p>按理说AES密钥应该是随机生成，不过我的程序没有实现。是我实现设定好的。</p><h2 id="具体代码见仓库"><a href="#具体代码见仓库" class="headerlink" title="具体代码见仓库"></a>具体代码见仓库</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Project </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Crypto </tag>
+            
+            <tag> Project </tag>
+            
+            <tag> Final Lab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Computer Network Knowledge</title>
       <link href="/post/20344235.html"/>
       <url>/post/20344235.html</url>
