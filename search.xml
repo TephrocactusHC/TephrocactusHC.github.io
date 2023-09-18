@@ -4,6 +4,45 @@
   
     
     <entry>
+      <title></title>
+      <link href="/post/0.html"/>
+      <url>/post/0.html</url>
+      
+        <content type="html"><![CDATA[<h1>关于本次实验</h1><p>来自论文：《Trusted-DNN: A TrustZone-based Adaptive Isolation Strategy for Deep Neural Networks》</p><p>项目的<a href="https://gitee.com/PaintZero/alexnet-tee/tree/master">gitee代码地址</a></p><h1>Ubuntu上运行</h1><h2 id="编译op-tee">编译op-tee</h2><p>首先要去<a href="https://optee.readthedocs.io/en/latest/">op-tee官方文档</a>安装依赖，相当多，略慢（取决于网速）。</p><p>学长的项目之中的编译过程如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">repo <span class="built_in">sync</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> build</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make toolchains</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make run</span></span><br></pre></td></tr></table></figure><p>有几个问题：</p><ol><li class="lvl-3"><p>repo大概率不好用，即使挂着梯子也无法下载。这时候需要换源。<a href="https://blog.csdn.net/GooTal/article/details/123196199">可供参考的方法</a></p></li><li class="lvl-3"><p>repo sync开始需要挂梯子运行，而且需要编译的包比较大，下载也许需要2-5G的流量，如果是梯子要提前看好。</p></li><li class="lvl-3"><p>第一条命令如果想要指定OP-TEE的版本，可以指定指定分支。具体可以看<a href="https://blog.csdn.net/weixin_44728238/article/details/104625347">这里有指定版本的命令</a>。不过我个人用的最新版本命令，也没事儿。</p></li><li class="lvl-3"><p>可以使用 <code>-j</code> 命令，但是我个人并不建议，因为在编译过程中很容易出问题，使用了这个命令很难确定到底断在哪里以及出了什么问题。</p></li><li class="lvl-3"><p>如果不能科学上网需要自己下载每一个包然后手动编译，比较麻烦，还是尽量找梯子。</p></li><li class="lvl-3"><p>make run 的运行速度<strong>极慢</strong>，我的电脑大概跑了5H才跑完，再加上前面的试错时间，难蚌。。。</p></li></ol><h2 id="运行程序">运行程序</h2><p>本项目的代码，之下的很多子目录并不能同时编译，只能一次运行一个。操作很简单，就是把程序放到examples之下然后重新make run，这次就快了。</p><h2 id="关于数据集">关于数据集</h2><p>首先，需要自己下载Tiny ImageNet数据集。然后自行下载 alexnet人家训练好的参数。然后运行tools里的程序做好划分。</p><p>然后，重点来了，如何上传数据集：</p><p>项目地址之下的方法貌似并不好用，至少和我这个最新的optee和qemu不太匹配，更好的方法是参考这个<a href="https://github.com/mofanv/darknetz">仓库</a>。</p><p>直接把数据集拷贝到out-br/target/root之下。</p><p>但是我遇到的问题是一旦数据集和参数超过了467MB就不成功了，因此只进行了压缩以后的参数进行实验。</p><p>一旦超过467MB提示如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ end Kernel panic - not syncing: VFS: Unable to mount root fsunknown-block(0,0) -]</span><br></pre></td></tr></table></figure><p>而通过df -h命令查看的结果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Filesystemdevtmpfs Size       Used       Available       Use% Mounted on</span><br><span class="line">devtmpfs           474.3M      0            474.3M       0% /dev</span><br><span class="line">tmpfs              498.4M      0            498.4M       0% /dev/shm</span><br><span class="line">tmpfs              498.4M      40k          498.4M       0% /tmp</span><br><span class="line">tmpfs              498.4M      16k          498.4M       0% /run</span><br></pre></td></tr></table></figure><p>看起来我的数据集和参数加在一起只有467MB的时候应该还可以，不知道为什么会有这个问题。</p><p>此问题暂时无解。</p><h2 id="整体情况">整体情况</h2><p>由于数据集的图片过多，因此在重新 make run 之后，编译速度还是比较慢，应该是有一些链接的过程，导致的特别慢。因此需要等待。</p><p>最后就可以顺利跑起来了。</p><h1>树莓派</h1><p>首先，我拿到的是树莓派3B+。</p><p>硬件安装步骤基本上看官网就好，B站也有。其实就两步，一是贴散热片，二是安装到亚克力板子里(<em>这玩意儿到底咋拆啊</em>)。</p><h2 id="格式化原来的SD卡">格式化原来的SD卡</h2><p>我拿到的SD卡里面有人家之前的系统，要先格式化。</p><p>确实遇到了一些小问题，就是插上卡以后并不是一个16G的盘，而是一个2G和一个260MB的盘。。。</p><p>然后我使用的是这个教程：<a href="https://www.cnblogs.com/hilary0614/p/reformatdisk.html">此处是一个格式化教程</a></p><p><strong>注意，无论是使用工具还是命令，格式化都万分危险！务必谨慎，并做好数据备份，不然万劫不复！</strong></p><p>然后顺利格式化，终于看到了一个14.8G大小的盘了:)</p><p>理论上树莓派自己的官方烧录镜像软件也会替你格式化，但是据说有风险hhh</p><h2 id="烧录镜像">烧录镜像</h2><p>主要过程来自这个<a href="https://zhuanlan.zhihu.com/p/147061445">参考</a></p><p>在探索的过程中发现<a href="https://xuanxuanblingbling.github.io/iot/2021/09/10/rpi3/">有个更好玩儿的？</a>这个没进行尝试，未来有时间可以看看。</p><p>烧录镜像直接采用 Raspberry Pi Imager</p><p>默认镜像，烧录很快，大概一刻钟就完成了。</p><p>遇到问题<a href="https://blog.csdn.net/weixin_42792088/article/details/121657463#fn6">1</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/post/0.html"/>
+      <url>/post/0.html</url>
+      
+        <content type="html"><![CDATA[<h1>417</h1><table><thead><tr><th style="text-align:center">相貌</th><th style="text-align:center">三观</th><th style="text-align:center">家庭背景</th></tr></thead><tbody><tr><td style="text-align:center">5-8</td><td style="text-align:center">5-6</td><td style="text-align:center">7-8</td></tr></tbody></table><h2 id="三观">三观</h2><ol><li class="lvl-3"><p>PUA</p></li><li class="lvl-3"><p>孩子</p></li><li class="lvl-3"><p>自由</p></li><li class="lvl-3"><p>女权主义</p></li><li class="lvl-3"><p>功利</p></li></ol><p>自己感兴趣的，逃离这个框架</p><p>自己的调和办法</p><p>直接</p><p>厦门生活</p><h1>Method</h1><p>Mum:Teacher<br>Papa:Boss</p><p>7k/month/person</p><h2 id="方法">方法</h2><ol><li class="lvl-3"><p>不能贫穷首先找厦门的</p></li></ol><ul class="lvl-0"><li class="lvl-2"><p>老乡群</p></li></ul><p>有钱人：</p><ul class="lvl-0"><li class="lvl-2"><p>哪的人（岛内）房价</p></li><li class="lvl-2"><p>父母以及祖辈的工作</p><ul class="lvl-2"><li class="lvl-6">务农，需要排除</li><li class="lvl-6">独生子</li><li class="lvl-6">体制内</li><li class="lvl-6">体制外 x</li></ul></li></ul><p>找有钱人：</p><ul class="lvl-0"><li class="lvl-2"><p>文科生(艺术)</p></li><li class="lvl-2"><p>烧钱的爱好：社团：摄影、乐器</p></li><li class="lvl-2"><p>穿着、用的电子产品（苹果）</p></li><li class="lvl-2"><p>看日常花销：饮食</p></li><li class="lvl-2"><p>爱好不能够接触漂亮女孩，摄影、吉他 x<br>管乐：木管乐器，钢琴，提琴本人工资，未来考虑</p></li></ul><ol start="2"><li class="lvl-3"><p>相貌</p></li></ol><p>身高、体型：</p><ul class="lvl-0"><li class="lvl-2"><p>运动类社团</p></li><li class="lvl-2"><p>运动</p></li></ul><p>相貌：看脸</p><ol start="3"><li class="lvl-3"><p>三观</p><ol><li class="lvl-7">来自于钱</li><li class="lvl-7">涵养、素质（阅读、爱好）</li><li class="lvl-7">家庭组成</li><li class="lvl-7">政治观点（社会热点事件）</li></ol></li></ol><h1>人物画像</h1><p>性别男，同岁及以上，最多3岁。来自厦门，文科生，独生子，家庭美满和睦，有一些烧钱的爱好，最好喜欢运动，喜好阅读，<strong>三观相合</strong>。</p><h1>途径</h1><ol><li class="lvl-3"><p>老乡群</p></li><li class="lvl-3"><p><strong>社团</strong>：探讨艺术</p></li><li class="lvl-3"><p>外校：联谊活动</p></li><li class="lvl-3"><p>亚文化群</p></li><li class="lvl-3"><p>父母相亲</p></li></ol><h1>提升您自己</h1><ol><li class="lvl-3"><p>外貌：</p><ol><li class="lvl-7">运动</li><li class="lvl-7">化妆（小红书、知乎、B站）</li><li class="lvl-7">保养（小红书、知乎、B站）</li><li class="lvl-7">衣品（小红书、知乎、B站）</li><li class="lvl-7">说话（播音）</li></ol></li><li class="lvl-3"><p>爱好</p><ol><li class="lvl-7">音乐，坚持，增进</li><li class="lvl-7">最好发展一些利于社交的</li></ol></li><li class="lvl-3"><p>内在多看书，多看纪录片，电影</p></li><li class="lvl-3"><p>金钱消费观，找寻聚会的机会</p></li><li class="lvl-3"><p>主动</p></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/post/0.html"/>
+      <url>/post/0.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="尊敬的刘哲理院长：">尊敬的刘哲理院长：</h3><h5 id="您好！">您好！</h5><p>    我是2020级信安法本科生穆禹宸。我近期一段时间，先后听了两次您讲的“小讲座”，一次是信安法的班会，还有一次是最近的创新研究与训练。但感觉还是有不少问题，因此向您发一封邮件。</p><p>    <strong>我本人的计划是出国留学，所以我想向您再询问一些更细致的关于科研的问题，如果可能的话我能不能进实验室做一些工作？</strong> 我个人其实对学习和后续发展没有什么想法，一直处于懵懂的状态，比如说我学的是信息安全，但是其实信息安全下面都有哪些小的领域我都不了解，对这些领域科研什么的更是一头雾水，不知道老师们和研究生们的科研都做些什么，我申请出国更不知道怎么才能找到方向。</p><p>    在出国方面其实我也比较迷茫，主要是对信安专业和选择项目、导师等等都没有什么自己的想法。我认识19级信安的陈豪斌学长，从他那里才得知还有直接申请国外的博士这一条路，后来仔细研究了一下，结合我自身条件也在考虑这个规划。但是我事实上连博士和硕士有什么区别都不知道，我唯一认识的读博的人就是陈豪斌，他和我说博士和硕士区别很大，很不一样。</p><p>    以前倒是也找过两三位老师聊过，表达过类似的想法，当然当时我还没确定要出国，也不了解什么博士之类的。但是一方面那时候老师们更偏向大创，我感觉不太适合那个模式，另一方面当时信安法的课也比较多，因此大多数在聊过之后也就没有和老师跟着做了。</p><p>    但是了解到若是直接申请博士，至少应该对科研有些了解，可我还什么都不懂，因此想向您再请教请教。我知道陈豪斌在您的实验室做过研究，我感觉他在您这里收获不少，我了解到您的实验室也很厉害，所以如果您要是觉得我还行我也想做一些科研的基础工作。</p><p>    我个人确实没什么特长，无论是ACM还是CTF都没参与过，也没有什么科研经历，以前倒是复现过AI方向的一些论文，但没有什么创新的工作。本科期间的整体成绩虽然算不上优秀，但是专业课的成绩都不低，单论本科的基础知识应该算一名合格的本科生了。熟练掌握的语言是python，对C++的掌握一般，没写过大型项目。我记得汪定老师说可能做研究和学分绩点关系也不太大，可以自己补习，因此鼓起勇气发一封邮件。</p><p>    <strong>不知道您是否愿意抽出宝贵时间解答我的问题，期待着您百忙之中给予我回复！</strong></p><p>    <strong>您若是太忙了，我的电话是15620352047，微信同手机号。线上交流我也可以。</strong></p><p>    谢谢！</p><p>    此致敬礼！</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>最小危险部门</title>
       <link href="/post/a28c55f4.html"/>
       <url>/post/a28c55f4.html</url>
@@ -64,7 +103,7 @@
       <link href="/post/78b0f154.html"/>
       <url>/post/78b0f154.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>openai/deployments/stopvicky/completions?api-version=2023-03-15-preview</p>]]></content>
       
       
       <categories>
