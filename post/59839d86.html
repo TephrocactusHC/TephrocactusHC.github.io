@@ -1,0 +1,753 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>os-knwoledge2 | TephrocactusHC</title><meta name="keywords" content="knowledge,os"><meta name="author" content="TephrocactusHC"><meta name="copyright" content="TephrocactusHC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文主要来自《精髓与设计原理》一书，黑书作为补充，部分来自于PPT，发现PPT的相当多内容来自于《精髓与设计原理》，看来这书得反复看。 不知道为什么宫老师的课讲的和哪本书都不能完全对上，因此我也是串着看，串着写。 一些总结 进程主要是由于Timesharing(时分复用)的观念而产生，希望最大限度利用CPU。 进程的实现，主要由进程控制块解决。 进程的切换，主要涉及进程控制块PCB的内容。 进程的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="os-knwoledge2">
+<meta property="og:url" content="https://tephrocactushc.github.io/post/59839d86.html">
+<meta property="og:site_name" content="TephrocactusHC">
+<meta property="og:description" content="本文主要来自《精髓与设计原理》一书，黑书作为补充，部分来自于PPT，发现PPT的相当多内容来自于《精髓与设计原理》，看来这书得反复看。 不知道为什么宫老师的课讲的和哪本书都不能完全对上，因此我也是串着看，串着写。 一些总结 进程主要是由于Timesharing(时分复用)的观念而产生，希望最大限度利用CPU。 进程的实现，主要由进程控制块解决。 进程的切换，主要涉及进程控制块PCB的内容。 进程的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/oscover.png">
+<meta property="article:published_time" content="2022-10-31T13:58:56.000Z">
+<meta property="article:modified_time" content="2022-10-31T13:59:53.456Z">
+<meta property="article:author" content="TephrocactusHC">
+<meta property="article:tag" content="knowledge">
+<meta property="article:tag" content="os">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/oscover.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://tephrocactushc.github.io/post/59839d86"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":10,"languages":{"author":"作者: TephrocactusHC","link":"链接: ","source":"来源: TephrocactusHC","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'os-knwoledge2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-31 21:59:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/doge.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/oscover.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">TephrocactusHC</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">os-knwoledge2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-31T13:58:56.000Z" title="发表于 2022-10-31 21:58:56">2022-10-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-31T13:59:53.456Z" title="更新于 2022-10-31 21:59:53">2022-10-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/cs/">cs</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="os-knwoledge2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>本文主要来自《精髓与设计原理》一书，黑书作为补充，部分来自于PPT，发现PPT的相当多内容来自于《精髓与设计原理》，看来这书得反复看。</p>
+<p>不知道为什么宫老师的课讲的和哪本书都不能完全对上，因此我也是串着看，串着写。</p>
+<h1>一些总结</h1>
+<p>进程主要是由于<code>Timesharing</code>(时分复用)的观念而产生，希望最大限度利用CPU。</p>
+<p>进程的实现，主要由进程控制块解决。</p>
+<p>进程的切换，主要涉及进程控制块PCB的内容。</p>
+<p>进程的设计目标：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由全部寄存器打包组成“上下文”context，通过保存和恢复“上下文”，实现进程的无感知启停切换</p>
+</li>
+<li class="lvl-2">
+<p>通过对“触发慢操作”的函数的封装和指令权限限定，实现进程的运行与等待状态切换的感知</p>
+</li>
+<li class="lvl-2">
+<p>监控硬件事件，用以驱动“进程状态机的变化”，从而实现对多个进程正确分类，有效处理</p>
+</li>
+</ul>
+<p>CPU资源的时分复用：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程切换：CPU资源的当前占用者切换</p>
+<ul class="lvl-2">
+<li class="lvl-6">保存当前进程在PCB中的执行上下文(CPU状态)</li>
+<li class="lvl-6">恢复下一个进程的执行上下文</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>处理机调度</p>
+<ul class="lvl-2">
+<li class="lvl-6">从就绪队列中挑选下一个占用CPU运行的进程</li>
+<li class="lvl-6">从多个可用CPU中挑选就绪进程可使用的CPU资源</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>调度程序：挑选就绪进程的内核函数</p>
+<ul class="lvl-2">
+<li class="lvl-6">调度策略</li>
+<li class="lvl-6">调度时机</li>
+</ul>
+</li>
+</ul>
+<p>如何比较调度算法？定义指标:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CPU使用率</p>
+</li>
+<li class="lvl-2">
+<p>吞吐量</p>
+</li>
+<li class="lvl-2">
+<p>周转时间</p>
+</li>
+<li class="lvl-2">
+<p>等待时间</p>
+</li>
+<li class="lvl-2">
+<p>响应时间</p>
+</li>
+</ul>
+<h1>进程</h1>
+<p>CPU其实就是在各个进程之间不停切换，因此每个进程都有自己的虚拟CPU。</p>
+<h2 id="定义">定义</h2>
+<p>进程的如下几个定义：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个正在执行的程序。</p>
+</li>
+<li class="lvl-2">
+<p>一个正在计算机上执行的程序实例。</p>
+</li>
+<li class="lvl-2">
+<p>能分配给处理器并由处理器执行的实体。</p>
+</li>
+<li class="lvl-2">
+<p>由一组执行的指令、一个当前状态和一组相关的系统资源表征的活动单元。</p>
+</li>
+</ul>
+<p>事实上，不太需要区分进程与程序。就是一段执行的代码</p>
+<h2 id="进程控制块（process-control-block）">进程控制块（process control block）</h2>
+<p>为了实现下文的进程模型，操作系统维护着一张表（一个数据结构数组），即进程表(process table)，每个进程表占用一个进程表项（进程控制块），这个块，包含了进程状态的重要信息。</p>
+<p>进程的两个基本元素是<code>程序代码</code>（<code>program code</code>,可能被执行相同程序的其他进程共享）和<code>与代码相关联的数据集</code>（set of data)</p>
+<p>以下信息可以表征程序执行的任何时刻：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>标识符</strong>：与进程相关的唯一标识符，用来区分其他进程。</p>
+</li>
+<li class="lvl-2">
+<p><strong>状态</strong>：若进程正在执行，则进程处于运行态。</p>
+</li>
+<li class="lvl-2">
+<p><strong>优先级</strong>：相对于其他进程的优先顺序。</p>
+</li>
+<li class="lvl-2">
+<p><strong>程序计数器</strong>：程序中即将执行的下一条指令的地址。</p>
+</li>
+<li class="lvl-2">
+<p><strong>内存指针</strong>：包括程序代码和进程相关数据的指针，以及与其他进程共享内存块的指针。</p>
+</li>
+<li class="lvl-2">
+<p><strong>上下文数据</strong>：进程执行时处理器的寄存器中的数据。</p>
+</li>
+<li class="lvl-2">
+<p><strong>I/O状态信息</strong>：包括显式1/0请求、分配给进程的1/0设备（如磁带驱动器）和被进程使用的文件列表等。</p>
+</li>
+<li class="lvl-2">
+<p><strong>记账信息</strong>：包括处理器时间总和、使用的时钟数总和、时间限制、记账号等。</p>
+</li>
+</ul>
+<p>控制块由操作系统创建和管理。因此，我们可以说进程由程序代码和相关数据及进程控制块组成。</p>
+<h2 id="进程状态">进程状态</h2>
+<h3 id="轨迹-trace">轨迹(trace)</h3>
+<p>列出为进程执行的指令序列，可描述单个进程的行为，这样的序列称为进程轨迹（trace）。给出各个进程轨迹的交替方式，就可描述处理器的行为。然后有一个调度器负责按照轨迹调度。</p>
+<h3 id="进程状态模型">进程状态模型</h3>
+<p>首先来看一下最简单的状态模型，这部分比较简单，不记笔记了。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-1.png" alt=""></p>
+<p>未运行进程必须位于某种类型的队列中，并等待执行时机。<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-2.png" alt=""><br>
+图3.5（b)给出了一个结构，该结构中有一个队列，队列中的每项都指向某个特定进程的指针，或队列可以由数据块构成 的链表组成，每个数据块表示一个进程。 我们可以用这个排队图来描述调度器的行为。被中断的进程转移到等待进程队列中，或在进程结束或取消时销毁它（离开系统）。在任何情形下，调度器均从队列中选择一个进程来执行。</p>
+<h3 id="进程的创建和终止">进程的创建和终止</h3>
+<h4 id="进程的创建">进程的创建</h4>
+<p>一个新进程添加到正被管理的进程集时.操作系统需要建立用于管理该进程的数据结构，并在内存中给它分配地址空间，这些行为构成了一个新进程的创建过程。</p>
+<h5 id="触发创建的情况">触发创建的情况</h5>
+<p>触发进程创建的事件通常有4个，如表所示。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事件</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">新的批处理作业</td>
+<td style="text-align:center">磁带或磁盘中的批处理作业控制流通常会提供给操作系统。当操作系统准备接收新工作时，将读取下一个作业控制命令</td>
+</tr>
+<tr>
+<td style="text-align:center">交互登录</td>
+<td style="text-align:center">终端用户登录到系统</td>
+</tr>
+<tr>
+<td style="text-align:center">为提供服务而由操作系统创建</td>
+<td style="text-align:center">操作系统耵以创建一个进程，代表用户程序执行一个功能，使用户无须等待（如控制打印的进程）</td>
+</tr>
+<tr>
+<td style="text-align:center">由现有进程派生</td>
+<td style="text-align:center">基于模块化的考虑或开发并行性，用户程序可以指示创逑多个进程</td>
+</tr>
+</tbody>
+</table>
+<p>当操作系统为另一个进程的显式请求创建一个进程时，这个动作就称为<code>进程派生(process spawning)</code>这个操作很有用处。</p>
+<p>当一个进程派生另一个进程吋，前一个称为<code>父进程(parent process)</code>,被派生的进程称为<code>子进程 (child process)</code>。</p>
+<h5 id="创建的过程">创建的过程</h5>
+<p>这里可能需要一些后面的知识步骤如下：</p>
+<ol>
+<li class="lvl-3">
+<p>为新进程分配一个唯一的进程标识符。</p>
+</li>
+<li class="lvl-3">
+<p>为进程分配空间。</p>
+</li>
+<li class="lvl-3">
+<p>初始化进程控制块。</p>
+</li>
+<li class="lvl-3">
+<p>设置正确的链接。</p>
+</li>
+<li class="lvl-3">
+<p>创建或扩充其他数据结构。</p>
+</li>
+</ol>
+<h4 id="进程终止">进程终止</h4>
+<p>黑砖给出了四种终止情况：</p>
+<ol>
+<li class="lvl-3">
+<p>正常退出（自愿的）</p>
+</li>
+<li class="lvl-3">
+<p>出错退出（自愿的）</p>
+</li>
+<li class="lvl-3">
+<p>严重错误（非自愿）</p>
+</li>
+<li class="lvl-3">
+<p>被其他进程杀死（非自愿）</p>
+</li>
+</ol>
+<p>《精髓与设计原理》的表概括了更加详细的进程终止的典型原因。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事 件</th>
+<th style="text-align:center">说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">正常完成</td>
+<td style="text-align:center">进程自行执行一个操作系统服务调用，表示它己经结束运行</td>
+</tr>
+<tr>
+<td style="text-align:center">超过时限</td>
+<td style="text-align:center">进程运行时闾超过规定的时限可以测星多种类型的时间，包括总运行时间(“挂钟时间”)、花费在执 行上的吋间.以及对于交互进程从上一次用户输入到当前时刻的时间总量</td>
+</tr>
+<tr>
+<td style="text-align:center">无可用内存</td>
+<td style="text-align:center">系统无法满足进程需要的内存空间</td>
+</tr>
+<tr>
+<td style="text-align:center">超出范围</td>
+<td style="text-align:center">进程试图访问不允许访问的内存单元</td>
+</tr>
+<tr>
+<td style="text-align:center">保护错误</td>
+<td style="text-align:center">进程试图使用不允许使用的资源或文件.或试图以一种不正确的方式使用，如往只读文件中写</td>
+</tr>
+<tr>
+<td style="text-align:center">算术错误</td>
+<td style="text-align:center">进程试图进行被禁止的计算，如除以零或存储大于硬件可以接纳的数字</td>
+</tr>
+<tr>
+<td style="text-align:center">时问超出</td>
+<td style="text-align:center">进程等待某一事件发生的时间超过了规定的最大值</td>
+</tr>
+<tr>
+<td style="text-align:center">I/O失败</td>
+<td style="text-align:center">在输入或输出期间发生错误，如找不到文件、在超过规定的最多努力次数后仍然读/写失败(如遇到磁 带上的一个坏区时)或无效操作(如从行式打印机中读)</td>
+</tr>
+<tr>
+<td style="text-align:center">无效指令</td>
+<td style="text-align:center">进程试图执行一个不存在的指令(通常是由于转移到了数据区并企图执行数裾)</td>
+</tr>
+<tr>
+<td style="text-align:center">特权指令</td>
+<td style="text-align:center">进程试图使用为操作系统保留的指令</td>
+</tr>
+<tr>
+<td style="text-align:center">数据误用</td>
+<td style="text-align:center">错误类型或未初始化的一块数据</td>
+</tr>
+<tr>
+<td style="text-align:center">操作员或操作系统干涉</td>
+<td style="text-align:center">由于某些原因.操作员或操作系统终止进程(如出现死锁时)</td>
+</tr>
+<tr>
+<td style="text-align:center">父进程终止</td>
+<td style="text-align:center">当一个父进程终止时，操作系统可能会自动终止该进程的所有子进程</td>
+</tr>
+<tr>
+<td style="text-align:center">父进程请求</td>
+<td style="text-align:center">父进程通常具有终止其任何子进程的权力</td>
+</tr>
+<tr>
+<td style="text-align:center">（了解即可，感觉作用不大）</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="状态模型">状态模型</h3>
+<p>黑砖上称为三状态模型：<code>运行态</code>、<code>就绪态</code>、<code>阻塞态</code>。《精髓》上称五状态模型，即还有<code>新建态</code>、<code>退出态</code>。PPT上介绍了更多，比如<code>挂起进程模型</code>。</p>
+<h3 id="挂起进程模型">挂起进程模型</h3>
+<h4 id="挂起">挂起</h4>
+<p>由于处理器远快于I/O,会出现内存中的所有 进程都在等待I/O的现象。因此，即便是多道程序设计，处理器多数时间仍可能处于空闲状态。解决方案之一是交换，即把内存中某个进程的一部分或全部移到磁盘中。有时需要对进程做分级处理，引入优先级会使某进程等待时间过长而被换至外存，这被称为进程挂起，其目的：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>提高处理机效率：就绪进程表为空时，要提交新进程，以提高处理机效率；</p>
+</li>
+<li class="lvl-2">
+<p>为运行进程提供足够内存：资源紧张时，暂停某些进程，如CPU繁忙（或实时任务执行）时内存会比较紧张；</p>
+</li>
+<li class="lvl-2">
+<p>便于调试：在调试时，挂起被调试进程对其地址空间进行读写。</p>
+</li>
+</ul>
+<h4 id="队列">队列</h4>
+<p>可以看到，进程是在状态之间不停切换。那么，每个状态，可以给一个队列。</p>
+<p>图3.8(a)给出了可能实现的排队规则，此时有两个队列：就绪队列和阻塞队列。进入系统的每个进程都放置在就绪队列中，当操作 系统选择另一个进程运行时，将从就绪队列中进行选择。对于无优先级的方案，这可以是一个简单 先进先出队列。当一个正在运行的进程被移出处理器时，它根据情况要么终止，要么放置在就绪或阻塞队列中。最后，当一个事件发生时，所有位于阻塞队列中等待该事件的进程都被放到就绪队列中。</p>
+<p>后一种方案意味着当一个事件发生时，操作系统必须扫描整个阻塞队列，搜索那些等待该事件的进程。在大型操作系统中，队列中可能有几百甚至几千个进程，此吋拥有多个队列将会很有效，一个事件可以对应一个队列。因此，事件发生时，相应队列中的所有进程都将转换到就绪态［见图3.8(b)］。 最后一种改进是，如果按照优先级方案分派进程.，那么维护多个就绪队列，每个优先级一个队 列.将会带來很大的便利。操作系统很容易就可确定哪个就绪进程具有最高优先级且等待时间最长。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-3.png" alt=""></p>
+<h4 id="挂起状态模型">挂起状态模型</h4>
+<p>有单挂起态和双挂起态的区别，不同操作系统差别非常大。</p>
+<p>其状态大致可分为：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>就绪状态(Ready)：进程在内存且可立即进入运行状态；</p>
+</li>
+<li class="lvl-2">
+<p>阻塞状态(Blocked)：进程在内存并等待某事件的出现；</p>
+</li>
+<li class="lvl-2">
+<p>阻塞挂起状态（Blocked, suspend）：进程在外存并等待某事件的出现；</p>
+</li>
+<li class="lvl-2">
+<p>就绪挂起状态（Ready, suspend）：进程在外存，但只要进入内存，即可运行；</p>
+</li>
+</ul>
+<h2 id="进程描述">进程描述</h2>
+<h3 id="操作系统的控制结构">操作系统的控制结构</h3>
+<p>操作系统为了管理进程和资源，必须掌握每个进 程和资源的当前状态。普遍采用的方法是，操作系统 构造并维护其管理的每个实体的信息表。阍3.11给 出了这种方法的大致范围，即操作系统维护的4种不 同类型的表：内存、I/O、文件和进程。尽管不同操作 系统的实现细节不同，但所有操作系统维护的信息基本都可以分为这4类。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-5.png" alt=""></p>
+<h3 id="进程控制结构">进程控制结构</h3>
+<p>主要就是进程表的内容</p>
+<h4 id="进程位置">进程位置</h4>
+<p>因此，一个进程至少应有足够的内存空间来保存其的程序和数据；此外，程序的执行通常涉及用于跟踪过程调用和过程间参数传递的栈。最后，还有与每个进程相关的许多属性，以便操作系统控制该进程。通常，属性集称为<code>进程控制块</code>（process control block）'。程序、数据、栈和属性的集合称为<code>进程映像</code>（process image）（见表）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项 目</th>
+<th style="text-align:center">说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">用户数据</td>
+<td style="text-align:center">用户空间中的吋修改部分，包括程序数据、用户栈区域和吋修改的程序</td>
+</tr>
+<tr>
+<td style="text-align:center">用户程序</td>
+<td style="text-align:center">待执行的程序</td>
+</tr>
+<tr>
+<td style="text-align:center">栈</td>
+<td style="text-align:center">毎个进程有一个或多个后进先出（LIFO）栈，栈用于保存参数、过程调用地址和系统调用地址</td>
+</tr>
+<tr>
+<td style="text-align:center">进程控制块</td>
+<td style="text-align:center">操作系统控制进程所需的数据</td>
+</tr>
+<tr>
+<td style="text-align:center">进程映像的位置取决于所用的内存管理方案。在最简单的情形下，进程映像保存在相邻的内存 块中或连续的内存块中。存储块位于外存（通常是磁盘）中，因此在操作系统管理进程时，其进程 映像至少应有一部分位于内存中。而要执行该进程，则必须将整个进程映像载入内存中或至少载入 虚存中。因此，操作系统需要知道每个进程在磁盘中的位置，并知道每个进程在内存中的位置。</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>现代操作系统假定分页硬件允许使用不连续的物理内存来支持部分常驻内存的进程气在任意 时刻，进程映像的一部分可在内存中，剩余部分可在外存中气因此，操作系统维护的进程表必须给出每个进程映像中的每页的位置。</strong></p>
+<p>有一个主进程表，每个进程在表中都有一个表项，每个表项至 少包含一个指向进程映像的指针。如果进程映像包括多个块，则这些信息直接包含在主进程表中， 或通过交叉引用内存表中的表项得到。当然，这种描述是一般性描述，不同操作系统会按自身的方 式来组织位置信息。</p>
+<h4 id="进程属性">进程属性</h4>
+<p>进程控制块信息分为三类：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进程标识信息</p>
+</li>
+<li class="lvl-2">
+<p>进程状态信息</p>
+</li>
+<li class="lvl-2">
+<p>进程控制信息<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-6.png" alt=""></p>
+</li>
+</ul>
+<h5 id="标识信息">标识信息</h5>
+<p>对于所有操作系统中的进程标识符（process identification）来说，每个进程都分配了 一个唯一的数字标识符。进程标识符可以简单地表示为主进程表中的一个索引；否则， 就必须有一个映射，以便操作系统可以根裾进程标识符定位相应的表。</p>
+<h5 id="状态信息">状态信息</h5>
+<p><code>处理器状态信息</code>（processor state information）由处理器寄存器的内容组成。运行某个进程时， 进程的信息一定会出现在寄存器中。中断进程时，必须保存该寄存器的所有信息，以便进程恢复执行时可以恢复所有这些信息。所涉寄存器的性质和数量取决于处理器的设计。</p>
+<p>所有处理器设计都包括一个或一组称为<code>程序状态字</code>（Program Status Word, PSW）的寄存器，它包含有状态信 息。PSW通常包含条件码和其他状态信息。Intel x86处理器中的处理器状态字就是一个很好的例子，它称为EFLAGS寄存 器（见图3.12和表3.6）,能被运行在x86 处理器上的任何操作系统（包括UNIX和 Windows）使用。</p>
+<h5 id="控制信息">控制信息</h5>
+<p>它是操作系 统控制和协调各种活动进程所需的额外信息。</p>
+<h4 id="映像在虚存中">映像在虚存中</h4>
+<p>图3.13给出了进行映像在虚存中的结构。每个进程映像都由进程控制块、用户栈、进程专用地 址空间以及与其他进程共享的其他地址空间组成。图中每个进程映像的地址范围看起来是连续的， 但实际情况可能并非如此，具体取决于内存管理方案和操作系统组织控制结构的方式。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-7.png" alt=""></p>
+<h3 id="进程控制块的作用">进程控制块的作用</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-8.png" alt=""><br>
+操作系统中的很多例程需要访问进程控制块中的信息。直接 访问这些表并不困难。每个进程都有一个唯一的ID号，它可用作进程控制块的指针表的索引。困难 不是访问而是保护，具体表现为两个问题：</p>
+<ol>
+<li class="lvl-3">
+<p>一个例程(如中断处理程序)中的错误可能会破坏进程控制块，进而破坏系统对受影响进 程的管理能力。</p>
+</li>
+<li class="lvl-3">
+<p>进程控制块结构或语义中的设计变化可能会影响到操作系统中的许多模块。</p>
+</li>
+</ol>
+<p>这些问题可要求操作系统中的所有例程都通过一个处理程序例程来解决，即处理程序例程的任 务仅是保护进程控制块，且是读写这些块的唯一仲裁程序。使用这类进程时，需要在性能和其他系统软件结其的信任度之间进行折中。</p>
+<h2 id="进程控制">进程控制</h2>
+<h3 id="执行模式">执行模式</h3>
+<p>这玩意应该被讲烂了。。。某些指令只能在特权模式下运行，包括读取或改变诸如程序状态字之类的控制寄存器的指令、原始I/O指令和与内存 管理相关的指令。另外，部分内存区域仅能在特权模式下访问。</p>
+<p>非特权模式通常称为用户模式(user mode),因为用户程序通常在该模式下运行；特权模式称为系统模式（system mode）、控制模式（control mode）或内核模式（kernel mode）,内核模式指的是操作系统的内核，它是操作系统中包含重要系统功能的部分。</p>
+<p><strong>使用两种模式的原因是保护操作系统和重要的操作系统表（如进程控制块〉不受用户程序的千 扰。在内核模式下，软件会完全控制处理器及其所有指令、寄存器和内存。</strong></p>
+<h4 id="处理器如何才能知道它正在什么模式下执行？模式如何变化？">处理器如何才能知道它正在什么模式下执行？模式如何变化？</h4>
+<p>程序状态字中通常存在一个指示执行模式的位，该位会因事件的改变而变化。典型情况下，当用户调用一个操作系统服务或中断来触发系统例程的执行时，执行模式将被置为内核模式；而当从系统服务返回到用户进程时，执行模式则置为用户模式。</p>
+<blockquote>
+<p>比如UCORE的LAB1，就有一个包含2位CPL （Current Privilege Level,当前特权级别）字段的处理器状态寄存 器（PSR）o级别0是最高特权级别，级别3是最低特权级別。多数操作系统（如Linux）为内核模式 使用级别0,为用户模式使用其他级别。发生中断时，处理器会清空PSR中的大部分位，包括CPL字 段。这会自动地将CPL设置为级别0。中断处理例程末尾的最后一个指令是IRT （Interrupt Return,中 断返回），它会使得处理器恢复中断程序的PSR,即恢复该程序的特权级别。应用程序进行系统调用 时，会出现类似的顺序。对于Itanium而言，应用程序通过如下方式实现系统调用：将系统调用标识 符和参数放到一个预定义的区域，然后执行一个特殊指令中断用户模式下的程序执行，将控制权交给内核。</p>
+</blockquote>
+<h2 id="进程切换">进程切换</h2>
+<h3 id="何时切换进程">何时切换进程</h3>
+<p>系统中断：分为中断和陷阱。中断就是与外部事件相关，陷阱就是错误。对于普通中断（interrupt），控制权首先 转给中断处理器，中断处理器完成一些基本的辅助工作后，再将控制权转给与已发生的特定中断相关的操作系统例程。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-9.png" alt=""></p>
+<h3 id="进程状态的变化">进程状态的变化</h3>
+<p>完整的进程切换步 骤如下：</p>
+<ol>
+<li class="lvl-3">
+<p>保存处理器的上下文，包括程序计数器和其他寄存器。</p>
+</li>
+<li class="lvl-3">
+<p>更新当前处于运行态进程的进程控制块，包括把进程的状态改变为另一状态（就绪态、阻塞 态、就绪/挂起态或退出态〉。还须更新其他相关的字段，包括退出运行态的原因和记账信息。</p>
+</li>
+<li class="lvl-3">
+<p>把该进程的进程控制块移到相应的队列（就绪、在事件/处阻塞、就绪/挂起）。</p>
+</li>
+<li class="lvl-3">
+<p>选择另一个进程执行，详见第四部分的讨论。</p>
+</li>
+<li class="lvl-3">
+<p>更新所选进程的进程控制块，包括把进程的状态改为运行态。</p>
+</li>
+<li class="lvl-3">
+<p>更新内存管理数据结构。是否需要更新取决于管理地址转换的方式。</p>
+</li>
+<li class="lvl-3">
+<p>载入程序计数器和其他寄存器先前的值，将处理器的上下文恢复为所选进程上次退出运行 态时的上下文。</p>
+</li>
+</ol>
+<h1>调度</h1>
+<p>主要介绍单处理器调度多道程序设计的关键是调度。实际上典型的调度有4种（见表9.1〉，其中I/O调度将在第11章 介绍（讲述有关I/O的问题）。其他三种调度类型属于处理器调度。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">种类</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">长程调度</td>
+<td style="text-align:center">决定加入待执行进程池</td>
+</tr>
+<tr>
+<td style="text-align:center">中程调度</td>
+<td style="text-align:center">决定加入部分或全部位于内存中的进程集合</td>
+</tr>
+<tr>
+<td style="text-align:center">短程调度</td>
+<td style="text-align:center">决定处理器执行哪个可运行进程</td>
+</tr>
+<tr>
+<td style="text-align:center">I/O调度</td>
+<td style="text-align:center">决定可用I/O设备处埋哪个进程挂起的I/O请求</td>
+</tr>
+</tbody>
+</table>
+<p>这里直接放一个表，因为累了。。。后面的内容下一篇再写<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/osk2-10.png" alt=""><br>
+大概就是这么集中经典算法，在知道的情况下，理解并掌握优缺点即可。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tephrocactushc.github.io">TephrocactusHC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tephrocactushc.github.io/post/59839d86.html">https://tephrocactushc.github.io/post/59839d86.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tephrocactushc.github.io" target="_blank">TephrocactusHC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/knowledge/">knowledge</a><a class="post-meta__tags" href="/tags/os/">os</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/oscover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/d2d6a337.html"><img class="prev-cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/network.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">computer-network-lab3-1</div></div></a></div><div class="next-post pull-right"><a href="/post/fc8df832.html"><img class="next-cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/algorithmbase.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Algorithm Week1</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/f071790c.html" title="os knowledge1"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/oscover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-18</div><div class="title">os knowledge1</div></div></a></div><div><a href="/post/20344235.html" title="Computer Network Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Computer Network Knowledge</div></div></a></div><div><a href="/post/e535f34f.html" title="BlockChainKnowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">BlockChainKnowledge</div></div></a></div><div><a href="/post/37965384.html" title="Data Structures  Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Data Structures  Knowledge</div></div></a></div><div><a href="/post/abcc0f12.html" title="Database Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Database Knowledge</div></div></a></div><div><a href="/post/70d6b5e4.html" title="Cryptography Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Cryptography Knowledge</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/doge.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">TephrocactusHC</div><div class="author-info__description">一个懂法律的码农啊</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/TephrocactusHC"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/TephrocactusHC" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2012026@mail.nankai.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">广告位招租！<br><img src="https://th.bing.com/th/id/R.09d4cfd59642429f00b1f86eb6725a7d?rik=%2b%2fGbHN06bhjZzg&pid=ImgRaw&r=0"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">一些总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9D%97%EF%BC%88process-control-block%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">进程控制块（process control block）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="toc-number">2.3.</span> <span class="toc-text">进程状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%A8%E8%BF%B9-trace"><span class="toc-number">2.3.1.</span> <span class="toc-text">轨迹(trace)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.3.2.</span> <span class="toc-text">进程状态模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BB%88%E6%AD%A2"><span class="toc-number">2.3.3.</span> <span class="toc-text">进程的创建和终止</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">进程的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%88%9B%E5%BB%BA%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">2.3.3.1.1.</span> <span class="toc-text">触发创建的情况</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.3.1.2.</span> <span class="toc-text">创建的过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%BB%88%E6%AD%A2"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">进程终止</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.3.4.</span> <span class="toc-text">状态模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%B5%B7%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.3.5.</span> <span class="toc-text">挂起进程模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%82%E8%B5%B7"><span class="toc-number">2.3.5.1.</span> <span class="toc-text">挂起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">2.3.5.2.</span> <span class="toc-text">队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%82%E8%B5%B7%E7%8A%B6%E6%80%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.3.5.3.</span> <span class="toc-text">挂起状态模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.4.</span> <span class="toc-text">进程描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.4.1.</span> <span class="toc-text">操作系统的控制结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.4.2.</span> <span class="toc-text">进程控制结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">进程位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%B1%9E%E6%80%A7"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">进程属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.2.2.1.</span> <span class="toc-text">标识信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.2.2.2.</span> <span class="toc-text">状态信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.2.2.3.</span> <span class="toc-text">控制信息</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%A0%E5%83%8F%E5%9C%A8%E8%99%9A%E5%AD%98%E4%B8%AD"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">映像在虚存中</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9D%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.4.3.</span> <span class="toc-text">进程控制块的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">2.5.</span> <span class="toc-text">进程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.5.1.</span> <span class="toc-text">执行模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E7%9F%A5%E9%81%93%E5%AE%83%E6%AD%A3%E5%9C%A8%E4%BB%80%E4%B9%88%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%89%A7%E8%A1%8C%EF%BC%9F%E6%A8%A1%E5%BC%8F%E5%A6%82%E4%BD%95%E5%8F%98%E5%8C%96%EF%BC%9F"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">处理器如何才能知道它正在什么模式下执行？模式如何变化？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2"><span class="toc-number">2.6.</span> <span class="toc-text">进程切换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%95%E6%97%B6%E5%88%87%E6%8D%A2%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.6.1.</span> <span class="toc-text">何时切换进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-number">2.6.2.</span> <span class="toc-text">进程状态的变化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">调度</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/a28c55f4.html" title="最小危险部门"><img src="/img/law.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="最小危险部门"/></a><div class="content"><a class="title" href="/post/a28c55f4.html" title="最小危险部门">最小危险部门</a><time datetime="2023-04-05T07:27:21.369Z" title="发表于 2023-04-05 15:27:21">2023-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/50dcf957.html" title="权力与意图"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/qlyyt.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="权力与意图"/></a><div class="content"><a class="title" href="/post/50dcf957.html" title="权力与意图">权力与意图</a><time datetime="2023-04-04T05:01:50.000Z" title="发表于 2023-04-04 13:01:50">2023-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/78b0f154.html" title="書法審美系列一"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/sffm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="書法審美系列一"/></a><div class="content"><a class="title" href="/post/78b0f154.html" title="書法審美系列一">書法審美系列一</a><time datetime="2023-04-01T13:31:16.000Z" title="发表于 2023-04-01 21:31:16">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/78b0f154.html" title="書法審美系列二"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/sffm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="書法審美系列二"/></a><div class="content"><a class="title" href="/post/78b0f154.html" title="書法審美系列二">書法審美系列二</a><time datetime="2023-04-01T13:31:16.000Z" title="发表于 2023-04-01 21:31:16">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/12345678.html" title="OPTEE"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/sffm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OPTEE"/></a><div class="content"><a class="title" href="/post/12345678.html" title="OPTEE">OPTEE</a><time datetime="2023-04-01T13:31:16.000Z" title="发表于 2023-04-01 21:31:16">2023-04-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By TephrocactusHC</div><div class="footer_custom_text">欢迎来到我的博客！<p><a style="margin-inline:5px"target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px"target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px"target="_blank" href="https://www.jsdelivr.com/"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用 Jsdelivr 为静态资源提供CDN加速" alt="Jsdelivr"></a><a style="margin-inline:5px"target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由 GitHub 托管" alt="GitHub"></a><a style="margin-inline:5px"target="_blank"href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" alt="img" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script type="text/javascript" src="/js/mouse.js"></script><script type="text/javascript" src="/js/flower.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　<script type="text/javascript" src=""https://cdn.jsdelivr.net/gh/yremp/yremp-js@1.5/sakura.js""></script>　<canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>

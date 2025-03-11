@@ -1,0 +1,1594 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>BlockChainKnowledge | TephrocactusHC</title><meta name="keywords" content="My Notes,Pre4APS,knowledge,BlockChain"><meta name="author" content="TephrocactusHC"><meta name="copyright" content="TephrocactusHC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="内容 复习的书是《区块链：技术驱动金融》。还得配合着PPT，有点麻烦。 第1章 密码学及加密货币概述 码学中的哈希算法（Hash）和数字签名（digital signature）技术 1.1 密码学哈希函数 哈希函数是一个数学函数，具有以下三个特性：  其输入可为任意大小的字符串。 它产生固定大小的输出。 它能进行有效计算，简单来说就是对于特定的输入字符串，在合理时间内，我们可以算出哈希函数的输出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlockChainKnowledge">
+<meta property="og:url" content="https://tephrocactushc.github.io/post/e535f34f.html">
+<meta property="og:site_name" content="TephrocactusHC">
+<meta property="og:description" content="内容 复习的书是《区块链：技术驱动金融》。还得配合着PPT，有点麻烦。 第1章 密码学及加密货币概述 码学中的哈希算法（Hash）和数字签名（digital signature）技术 1.1 密码学哈希函数 哈希函数是一个数学函数，具有以下三个特性：  其输入可为任意大小的字符串。 它产生固定大小的输出。 它能进行有效计算，简单来说就是对于特定的输入字符串，在合理时间内，我们可以算出哈希函数的输出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg">
+<meta property="article:published_time" content="2023-01-11T13:22:50.000Z">
+<meta property="article:modified_time" content="2023-03-06T06:18:24.568Z">
+<meta property="article:author" content="TephrocactusHC">
+<meta property="article:tag" content="My Notes">
+<meta property="article:tag" content="Pre4APS">
+<meta property="article:tag" content="knowledge">
+<meta property="article:tag" content="BlockChain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://tephrocactushc.github.io/post/e535f34f"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":10,"languages":{"author":"作者: TephrocactusHC","link":"链接: ","source":"来源: TephrocactusHC","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BlockChainKnowledge',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-06 14:18:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/static-butterfly/dist/css/index.min.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/scrollbar.css"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/doge.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">TephrocactusHC</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BlockChainKnowledge</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-11T13:22:50.000Z" title="发表于 2023-01-11 21:22:50">2023-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-06T06:18:24.568Z" title="更新于 2023-03-06 14:18:24">2023-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Pre4APS/">Pre4APS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">17.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>54分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BlockChainKnowledge"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>内容</h1>
+<p>复习的书是《区块链：技术驱动金融》。还得配合着PPT，有点麻烦。</p>
+<h1>第1章 密码学及加密货币概述</h1>
+<p>码学中的哈希算法（Hash）和数字签名（digital signature）技术</p>
+<h2 id="1-1-密码学哈希函数">1.1 密码学哈希函数</h2>
+<p>哈希函数是一个数学函数，具有以下三个特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">其输入可为任意大小的字符串。</li>
+<li class="lvl-2">它产生固定大小的输出。</li>
+<li class="lvl-2">它能进行有效计算，简单来说就是对于特定的输入字符串，在合理时间内，我们可以算出哈希函数的输出。更准确地说，对应n位的字符串，其哈希值计算的复杂度为 $ O(n) $ 。</li>
+</ul>
+<p>使哈希函数达到密码安全，我们要求其具有以下三个附加特性：</p>
+<ol>
+<li class="lvl-3">
+<p>碰撞阻力（collision-resistance）；</p>
+</li>
+<li class="lvl-3">
+<p>隐秘性（hiding）；</p>
+</li>
+<li class="lvl-3">
+<p>谜题友好（puzzle-friendliness）<em>其中，谜题友好并非加密的hash函数的一般要求，但是对数字货币却是</em></p>
+</li>
+</ol>
+<h3 id="碰撞阻力">碰撞阻力</h3>
+<p>加密的哈希函数的第一个特性是它要具有碰撞阻力。这里的碰撞指对于两个不同的输入，产生相同的输出。如果对于哈希函数H(·)，没有人能够找到碰撞，我们则称该函数具有碰撞阻力</p>
+<blockquote>
+<p><strong>如果无法找到两个值，x和y，x≠y，而H(x)=H(y)，则称哈希函数H具有碰撞阻力。</strong></p>
+</blockquote>
+<p>根据鸽巢原理（Pigeonhole Principle），我们可以得出，必然会有大量可能的输入被映射到任意特定输出.。生日悖论（birthday paradox）对于某些哈希函数，存在有效的测试碰撞的方法。 但对于某些哈希函数，我们无法确认识别碰撞的有效方法是否存在，我们只是怀疑这 些函数具有防碰撞特性，但是我们已经证明，世界上没有哈希函数具有防碰撞特性。</p>
+<h4 id="用处">用处</h4>
+<p>哈希输出作为信息摘要 （message digest）</p>
+<h3 id="隐秘性">隐秘性</h3>
+<p>哈希函数H具有隐秘性，如果：当其输入r选自一个高阶最小熵（high min-entroy）的概率分布，在给定H（r‖x）条件下来确定x是不可行的。</p>
+<h4 id="应用：承诺">应用：承诺</h4>
+<p>承诺协议 一个承诺协议方案由两个算法构成： ● com:=commit(msg, nonce)，承诺函数将信息（msg）和一个临时随机数 （nonce）作为输入，输出就是一个“承诺”。 ● verify(com, msg, nonce)，验证函数将某个承诺输出（com）、临时随机数 （nonce）及信息（msg）作为输入，如果com：=commit(msg, nonce)，则返 回“真”（true）；反之则返回“假”（false）。 我们要求以下两个安全特性要成立： ● 隐秘性：已知com，没有可行的方法找到msg。 ● 约束性：没有可行的办法找到两组(msg, nonce)和(msg’, nonce’)， msg≠msg’，而commit(msg, nonce)：=commit(msg’, nonce’)。</p>
+<blockquote>
+<p>对于每次的承诺值，你都需要选择新的随机值，这一点很重要。在密码学中，术 语nonce是指，该取值只能使用一次。</p>
+</blockquote>
+<p>commit(msg, nonce):=H(nonceǁmsg)</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>隐秘性：已知H(nonce‖msg)，没有可行方法找到 msg。</p>
+</li>
+<li class="lvl-2">
+<p>约束性：没有可行方法找到两对(msg, nonce)和(msg’, nonce’)， msg≠msg’，而H(nonce‖msg):=H(nonce’‖msg’)。</p>
+</li>
+</ul>
+<h3 id="谜题友好">谜题友好</h3>
+<p>解释：<strong>如果有一个人想找到y值所对应的输入，假定在输 入集合中，有一部分是非常随机的，那么他将非常难以求得y值对应的输入。</strong></p>
+<blockquote>
+<p>如果对于任意n位输出值y，假定k选自高阶最小熵分布，如果无法找到 一个可行的方法，在比 $ 2^n $ 小很多时间内找到x，保证H(k‖x)=y成立，那么我们称哈 希函数H为谜题友好。</p>
+</blockquote>
+<h4 id="应用">应用</h4>
+<p>如果一个哈希函数具备谜题友好特性，这就意味着对于这个谜题没有一个解决策略， 比只是随机地尝试x取值会更好。因此，如果我们要把谜题做成很难解决是可以的，只要 我们能用适合的随机方式生成谜题ID。当我们讨论比特币采矿（是一种搜索谜题）时会 采用这一思路。</p>
+<h3 id="安全哈希算法-（Secure-Hash-Algorithm-256，简称SHA-256）">安全哈希算法 （Secure Hash Algorithm 256，简称SHA-256）</h3>
+<p>将接受固定长度的哈希函数 转化为可接受任意长度输入的哈希函数，我们称这个转换过程为MD （Merkle-Damgard）变换</p>
+<p>可用于固定长度，具备碰撞阻力的哈希函数被称为是压缩函数 （compression function）</p>
+<h2 id="哈希指针及数据结构">哈希指针及数据结构</h2>
+<p>哈希指针是一个指向数据存储位 置及其位置数据的哈希值的指针。一个普通的指针可以告诉你数据存储的位置，哈希指针 不但可以告诉你数据存储的位置，并且还可以给你一种方式，让你验证数据没有被篡改过。</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207172440.png" alt=""></p>
+<p>我们通过哈希指针构建一个链表，我们将这个数据结构称为区块链 （block chain）。在普通链表中有一系列区块，每个a区块既有数据也有一个指向上一个 区块的指针。而在区块链中，上一个区块指针被置换为哈希指针。因此，每个区块不仅能 告诉我们上一个区块的值在哪里，还包含了该值的摘要，使我们能够验证那个值没有改 变。我们存储链表头部（the head of list），即一个普通的哈希指针指向最近使用的数据区块</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207172528.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207174924.png" alt=""></p>
+<p>如果对手想要篡改区块链中任意地方的数据，为了保证整个内容一 致，他需要篡改所有的哈希指针直至最开始的地方。他最终将碰到障碍，因为他不能篡改 链表头部的指针。这样，我们便知道，仅通过记住一个哈希指针，我们就基本记住了整个 链表的防篡改哈希值。因此，我们可以搭建一个包含很多区块的区块链网络，链表头部的 哈希指针被称作创世区块 （genesis block）</p>
+<h3 id="Merkle-Tree-梅克尔树，默克尔树">Merkle Tree 梅克尔树，默克尔树</h3>
+<p>使用哈希指针的二叉树 也叫作梅克尔树 (Merkle trees)，以其发明者拉尔夫·梅克尔（Ralph Merkle）的名字命名。<br>
+<strong>挺显然的，不写了</strong></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207175232.png" alt=""></p>
+<p>在梅克尔树的数据结构中，所有的数据区块都被两两分组，指向这些数据区块的指针被存储在上一 层的父节点（parent node）中，而这些父节点再次被两两分组，并且指向父节点的指针被存储在上一层 的父节点中，一直持续这个过程，直到最后我们到达树的根节点。</p>
+<h4 id="隶属证明">隶属证明</h4>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207180052.png" alt=""></p>
+<p><strong>（这个问题应该是还需要堂兄弟节点进行证明）</strong><br>
+比如这个树的其他节点被换了</p>
+<h4 id="非隶属证明">非隶属证明</h4>
+<p>通过展示被验证区块之前的区块路径，以及被验证区块之后的区块路径，就可以达到目 的。如果之前、之后两个区块在树上是连续的，那么这说明了被验证区块与该梅克尔树之 间是非隶属关系。因为被验证区块确实隶属于梅克尔树，它需要在两个条目之间，而如果 两个条目是连续的话，二者之间则并没有空间。</p>
+<h2 id="1-3-数字签名">1.3 数字签名</h2>
+<p>数字签名 （digital signatures）</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207200413.png" alt=""></p>
+<p>第一，只有你可以制作你自己的签名，但任何看到它的人都可以验证其有效 性；第二，我们希望签名只与某一特定文件发生联系，因此该签名不能用于表明你同意或 支持另一份不同的文件。对于手写签名来说，第二条就如同确保别人不能将你的签名从一 份文件上剪下来，贴到另一份文件的末尾那样。</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207181956.png" alt=""></p>
+<p>第一个特性很直 接，那就是有效的签名必须通过验证。如果我用我的密钥sk签署了一条消息，之后有人试 图通过使用我的公钥pk验证关于同一条消息的签名，该签名必须证实为正确。这个特性是 对签名有效的最基本要求。 不可伪造性。 第二个要求计算上不可能伪造签名。也就是说，知道你公钥并看到你 在某些信息上签名的对手，不能伪造他还未见过的你在其他信息上的签名。这一不可伪造 特性类似于我们与对手之间在进行一场游戏，游戏的使用在密码安全证明中很常见。</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207200609.png" alt=""></p>
+<p>不可伪造性游戏是对手（黑客）和挑战者一起玩这样一个游戏：如果黑客可以在一个之前没有见过 的消息上进行签名，那么黑客就赢得这个游戏；反之，如果黑客做不到，挑战者就赢得游戏，从而可以 证明这个数字签名方案是不可伪造的。</p>
+<h4 id="实践中的考量">实践中的考量</h4>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207203315.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>很多签名算法是随机的（特别是比特币使用的算法），因此我们需要随机性的良好 来源。</p>
+</li>
+<li class="lvl-2">
+<p>对信息的哈希值进行签署，而非对信息本身进行签署。</p>
+</li>
+<li class="lvl-2">
+<p>我们后面会用到的另一个技巧是，可以对于哈希指针进行签署。如果你签署了哈希指 针，那么该签名覆盖（或者说保护）整个结构——这不仅仅是哈希指针本身，还包括哈希 指针指向的整个区块链。</p>
+</li>
+</ul>
+<h3 id="传统签名与数字签名">传统签名与数字签名</h3>
+<p>传统签名：保证信息真实性，验证签名者身份数字签名：又称<code>公钥</code>数字签名。 是只有信息发送者才能产生的别人无法伪造的<code>一段数字串</code>，数字串也是对信息真实性的有效证明</p>
+<h3 id="加密过程">加密过程</h3>
+<p><code>私钥加密，公钥验证</code>。这时整个加密的信息就是一个<code>数字签名(Digital Signature)</code></p>
+<h3 id="ECDSA算法">ECDSA算法</h3>
+<p>是个椭圆曲线算法</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>个人密钥：256位</p>
+</li>
+<li class="lvl-2">
+<p>公钥（未压缩）：512位</p>
+</li>
+<li class="lvl-2">
+<p>公钥（压缩）：257位</p>
+</li>
+<li class="lvl-2">
+<p>待签名信息：256位</p>
+</li>
+<li class="lvl-2">
+<p>签名：512位</p>
+</li>
+</ul>
+<h2 id="1-4-公钥即身份">1.4 公钥即身份</h2>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207214320.png" alt=""></p>
+<p>将公钥视为身份的一个结果是，你可以随时制定新的身份——你可以简单通过数字签 名方案中的generateKeys程序，生成新的密钥对sk和pk。pk是你可以使用的新的公共身 份，sk是相应的密钥，只有你自己知道并可以让你代表身份为pk发声。在实践中，你可能 会使用pk的哈希作为你的身份，这是因为公钥很大。如果是这样的话，为了验证消息来自 你的身份，人们会需要验证：（1）你的身份确实是pk的哈希；（2）信息能经过公钥pk验 证。</p>
+<h3 id="去中心化身份管理">去中心化身份管理</h3>
+<p>你可以自己作为用户 注册，而无须到一个中央机构注册为系统用户。你不需要别人给你一个用户名，你也不需 要告诉任何人你会使用什么名字。<strong>事实上，这就是比特币对待身份的方式。这些身份在 比特币语言中被称为地址。你可以常常听到地址这个词，用于比特币或加密货币相关的内 容中，而地址其实就是公钥的哈希值。作为去中心化身份管理方案的一部分，它就是某人 凭空捏造的一个身份而已。</strong></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207215521.png" alt=""></p>
+<p><strong>在比特币系统中，你不需要明确地注册或揭露你的真实身份，但是你的行 为模式本身可能是可识别的。</strong> 人们看到这些声明便知道拥有 这个身份的人做出了特定的一系列行为。他们能够开始将细节联系起来，从这一系列的行 为推断出你的真实身份。随着时间的推移，一个观察者可以将这些事情联系起来，并推断 出这样的结论：“天，这个人的行为好像乔（Joe），可能这个人就是乔。”</p>
+<h2 id="1-5-两种简单的加密货币">1.5 两种简单的加密货币</h2>
+<h3 id="高飞币">高飞币</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207215726.png" alt=""></p>
+<p>高飞币只有两个规则：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一个规则是指定高飞可以随时创建新币，且这些 新创建的币都属于他。</p>
+</li>
+<li class="lvl-2">
+<p>第二个规则是，拥有此币的人可以将其转给其他人。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207220257.png" alt=""></p>
+<h4 id="高飞币的规则">高飞币的规则</h4>
+<ol>
+<li class="lvl-3">
+<p>高飞（ Goofy ）可以签署声明表示他使用唯一的货币编号来创建一个新币</p>
+</li>
+<li class="lvl-3">
+<p>货币的所有人可以通过签署声明表示货币的转让，即&quot;将这个货币转移给 X ( X 为公钥）&quot;</p>
+</li>
+<li class="lvl-3">
+<p>任何人可以<strong>追根溯源</strong>，验证一枚货币的有效性</p>
+</li>
+</ol>
+<h4 id="高飞币的优缺点">高飞币的优缺点</h4>
+<h6 id="缺点：">缺点：</h6>
+<p>1.货币发行权控制在 Goofy 手中<br>
+2.<code>双重支付（ Double Spending )</code></p>
+<h6 id="优点：">优点：</h6>
+<p>货币的<strong>转让</strong>技术</p>
+<h3 id="财奴币（ScroogeCoin）">财奴币（ScroogeCoin）</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207220744.png" alt=""></p>
+<p>财奴币是以高飞币为基础创建的，但在数据结构方面更复杂。第一个主要概念如下：一个叫财奴的指定实体将负责公布包含所有发生过的交易历史 记录的<code>仅增账目（append-only ledger）</code></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207222442.png" alt=""></p>
+<p>每个数 据块都包含一次交易（在实践中，一种优化的做法是将多次交易放入同一个区块中，比特 币就是这样做的），每个区块包含交易的ID、交易的内容，以及上一个区块的哈希指 针。财奴数字签名是针对最后一个哈希指针（它约束整个结构中所有的数据），并将签名与区块链一起发布。在财奴币中，只有在由财奴签名的区块链的交易才算数。</p>
+<p>为什么除了让财奴签署每个区块，我们还需要一个带哈希指针的区块链？这样做是保 证仅增特性。因为财奴有可能试图增加或移除交易记录，或者改变已有交易，而一旦有了 哈希指针，将会影响到后面所有的区块。</p>
+<h4 id="两种操作">两种操作</h4>
+<p>第一，造币</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230207222742.png" alt=""></p>
+<p>第二种交易是付币（PayCoins）。这一交易会消耗币，就是说消除它们，并创建具有 相同总值的新币。</p>
+<h4 id="规则">规则</h4>
+<p>财奴币（ ScroogeCoin )交易有效当且仅当</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>被消耗的货币为有效货币，之前的交易中已经创建</p>
+</li>
+<li class="lvl-2">
+<p>本次交易不是双重支付</p>
+</li>
+<li class="lvl-2">
+<p>本次交易产生的币值等于消耗币值</p>
+</li>
+<li class="lvl-2">
+<p>本次交易消耗的所有货币均有其所有者的有效签名</p>
+</li>
+</ul>
+<h4 id="财奴币（-ScroogeCoin-）优缺点">财奴币（ ScroogeCoin ）优缺点</h4>
+<h5 id="优点">优点</h5>
+<p>引入了 Ledger 来防止双重支付</p>
+<h5 id="缺点：-中心化">缺点：(中心化)</h5>
+<p>心双可以拒绝公开交易，不提供服务财奴可以随时造币</p>
+<h1>第2章 比特币如何做到去中心化</h1>
+<p><s>终于破解了suming的pdf权限问题，可以复制了，省事很多</s></p>
+<h2 id="目录">目录</h2>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p>2.1 中心化与去中心化</p>
+</li>
+<li class="lvl-3">
+<p>2.2 分布式共识</p>
+</li>
+<li class="lvl-3">
+<p>2.3 使用区块链达成没有身份的共识</p>
+</li>
+<li class="lvl-3">
+<p>2.4 奖励机制与工作量证明</p>
+</li>
+<li class="lvl-3">
+<p>2.5 总结</p>
+</li>
+</ul>
+<p><strong>区块链：技术手段</strong>+<code>激励机制</code></p>
+<h2 id="2-1-中心化与去中心化">2.1 中心化与去中心化</h2>
+<p>中心化与去中心化也并非水火不容，其实没有一个系统是完全中心化，或者是完全去 中心化的。</p>
+<p><strong>混合模式</strong></p>
+<h3 id="去中心化解决的问题-必考">去中心化解决的问题(必考)</h3>
+<ol>
+<li class="lvl-3">
+<p>谁在维护交易账本？</p>
+</li>
+<li class="lvl-3">
+<p>谁有权利批准哪个交易是正当有效的？</p>
+</li>
+<li class="lvl-3">
+<p>谁在制造新的比特币？</p>
+</li>
+<li class="lvl-3">
+<p>谁在制定系统变化规则？</p>
+</li>
+<li class="lvl-3">
+<p>比特币是如何取得交易价值的？</p>
+</li>
+</ol>
+<p><strong>前三个问题反映了比特币协议的技术细节，我们将在本章重点讨论</strong></p>
+<h2 id="2-2-分布式共识（distributed-consensus）">2.2 分布式共识（distributed consensus）</h2>
+<p>分布式键值 （key-value）存储库</p>
+<h3 id="分布式共识协议">分布式共识协议</h3>
+<p>在一个有n个节点的系统中，每一个节点都有一个输入值，其中 一些节点具有故障，甚至是恶意的。<br>
+<strong>一个分布式共识协议有以下两个属性：</strong></p>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><strong>输入值的中止须经所有诚实节点来确定。</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>这个输入值必须由诚实节点来生成。</strong><br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208160137.png" alt=""><br>
+那么，所有的节点是如何对一个区块达成共识的呢？一个方法是，在一个时间段里， 比如说每隔十分钟，每个节点都提议，自己的未被认可的交易成为已经达成共识的区块链 后面的下一个区块，然后那些节点会执行一些共识协议，每个节点把自己提议的区块作为 输入。</p>
+</li>
+</ul>
+<p><code>Propose-》Consensus  </code>正当的交易可以等待下一次被打进区块的机会`</p>
+<h3 id="技术上面临的挑战">技术上面临的挑战</h3>
+<ol>
+<li class="lvl-3">
+<p>达成共识是一个难题：节点会宕机或者存在恶意节点</p>
+</li>
+<li class="lvl-3">
+<p>点对点网络通信不完美</p>
+</li>
+<li class="lvl-3">
+<p>信息传递的延迟</p>
+</li>
+</ol>
+<h3 id="不可能性结论">不可能性结论</h3>
+<p><strong>拜占庭将军问题Byzantine Generals Problem</strong></p>
+<p>拜占庭是东罗马帝国的首都，它的军队分成多 个师，每个师都由一个将军统领。这些将军通过信使进行交流，来达成一个共同作战方 案，有些将军可能是叛徒，想故意破坏这个过程，这会造成那些忠诚的将军也无法达成一 个统一的作战计划。解决这个难题的办法就是让那些忠诚的将军在这样的情况下达成统一 作战方案，而避免那些叛徒对作战方案的误导。事实证明，如果叛徒数量超过1/3时，这 个难题将无法克服，那些忠臣的计划终会被叛徒们破坏。</p>
+<p><code>将军的总数为n，n里面背叛者的数量为t， 则只要n &gt; 3t就可以容错。</code></p>
+<h3 id="打破传统上的假设">打破传统上的假设</h3>
+<p>比特币实际运行情况远比理论的研究结果好的多</p>
+<h4 id="比特币到底打破了经典模型里的哪些假设呢？">比特币到底打破了经典模型里的哪些假设呢？</h4>
+<p><strong>第一，比特币引进了奖励的理念第二，包含随机性；经过一段时间观点出现分歧的概率按指数下降</strong></p>
+<p>比特币到底打破了经典模型里的哪些假设呢？第一，比特币引进了奖励的理念，这对 分布式共识协议来说是一个全新的理念，这也只有在比特币里才可能实现，因为比特币也 是个货币，所以人们自然而然地会为了金钱奖励而变得诚实起来。所以，比特币并没有真 正解决分布式共识问题，它只是在特定货币系统下解决了这个问题而已。 第二，比特币体系包含随机性这个概念。在后面两节里我们将会看到，比特币的共识 算法很大程度上依赖于随机性。此外，它也不再纠结于规定共识的起点与终点。相反，共 识是通过一段较长的时间而达成的，在实际系统中，达成共识大约需要一个小时左右。但 即使在一个小时以后，节点们也无法确定哪一个交易块应该进入总账本。但随着时间的流 逝，我们对某一个块的认识与最终总体共识相吻合的概率将越来越大，观点出现分歧的概 率按指数级下降。比特币在以上方面的不同，让它能够逾越传统理论关于分布式共识不可 达成这一鸿沟。</p>
+<h2 id="2-3-使用区块链达成没有身份的共识">2.3 使用区块链达成没有身份的共识</h2>
+<p>乱造节点就是所谓的 <strong>“女巫攻击”（sybil attack）</strong> 现象。女巫就是恶意黑客制造的不同节点，这些节点看起来像是对应 不同的身份的人，其实是由一个人在幕后控制。另一个原因是<strong>化名制（pseudonymity）</strong>， 也是比特币想达到的一个目标，所以即使可以替所有节点建立唯一真实身份，我们也不想 那样做。虽然比特币还是不能保证真正的匿名，一个用户用不同身份做的不同交易还是有 办法被最终追踪到，但比特币的特性毕竟没有强迫大家用真实身份来加入。这是比特币的 重要特性，也是比特币系统的核心理念。</p>
+<h3 id="隐性共识（inplicit-consensus）">隐性共识（inplicit consensus）</h3>
+<p>每一个回合：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个<code>随机</code>节点被选中，然 后这个节点可以提议这个链的下一个区块</p>
+</li>
+<li class="lvl-2">
+<p>其他节点可以通过<code>接龙</code>的方式，隐性的 接受或者拒绝</p>
+</li>
+</ul>
+<p>这个算法的简化假设是，可以随意选择一个节点，这些节点都不会受到女巫攻击 的影响。</p>
+<ol>
+<li class="lvl-3">
+<p>新的交易被广播到所有节点上。</p>
+</li>
+<li class="lvl-3">
+<p>每个节点都将新的交易放进一个区块。</p>
+</li>
+<li class="lvl-3">
+<p>在每个回合，一个随机的节点可以广播它的区块。</p>
+</li>
+<li class="lvl-3">
+<p>其他节点可以选择接受这个区块，前提是如果区块里的交易都是正当的（有真的签名）。</p>
+</li>
+<li class="lvl-3">
+<p>节点们可以<strong>把以上区块的哈希值放进自己的区块</strong>里，以此来表示它们对那个新 区块的认可。</p>
+</li>
+</ol>
+<h3 id="比特币的攻击">比特币的攻击</h3>
+<ol>
+<li class="lvl-3">
+<p>窃取比特币—&gt;伪造数字签名</p>
+</li>
+<li class="lvl-3">
+<p>拒绝服务攻击:如果Alice拒绝提供服务 给Bob； Bob等到下一个诚实节点发起区块的时候，交易记录会被放进这个区块里</p>
+</li>
+<li class="lvl-3">
+<p>双重支付攻击:Alice给Bob or Alice转到另外一个地址 一个交易就是一个数据结构：里面有Alice的数 字签名，一个付给Bob的公钥（地址），一个 哈希值（指向先前的一笔交易的输出）</p>
+</li>
+</ol>
+<h4 id="双重支付">双重支付</h4>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208170033.png" alt=""><br>
+<code>取决于最后哪一个区块被纳入长期的共识链</code></p>
+<p><code>从道德角度看，分支截然不同； 但从技术角度看，两笔交易都符合规范，形式上有效</code></p>
+<p>另一个就被叫做孤块 （orphan block）</p>
+<h4 id="零验证交易-zero-confirmation-transaction">零验证交易 (zero confirmation transaction)</h4>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208170327.png" alt=""></p>
+<h3 id="诚实大多数原理">诚实大多数原理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>算力主要消耗在挖矿、区块链的生成、交易确认中</p>
+</li>
+<li class="lvl-2">
+<p>系统稳定性的缺省信任基础：算力掌握在大多数诚实的用户手中，出于自身利益的考虑，这些用户也 愿意维护区块链系统</p>
+</li>
+<li class="lvl-2">
+<p>比特币51%攻击理论：攻击者要创造一条新链条， 然后长度超越旧链条，覆盖旧链条。如果现在只有 1次确认，被覆盖的概率稍高，而到了6次确认，被覆盖的概率下降为接近&quot;0&quot;。</p>
+</li>
+</ul>
+<p>诚实链和攻击链的之间比赛的特征是一 个<code>二项分布的随机漫步</code>。成功的事件是 诚实的节点被一个数据块扩展，它的领 先增加一个点，失败的事件是攻击者的链扩展一个数据块，差距减少一个点。</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208171823.png" alt=""><br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208171844.png" alt=""></p>
+<h2 id="2-4-奖励机制与工作量证明">2.4 奖励机制与工作量证明</h2>
+<p><code>高明的激励设计</code></p>
+<p>无法判断那笔交易是道义上合法； 很难惩罚，因为节点没有身份</p>
+<p><code>给予表现诚实的节点奖励</code>： 用比特币来奖励创造区块的节点</p>
+<h3 id="区块奖励">区块奖励</h3>
+<p>每产生210 000个区块（大约4年），区块奖励将被减半。最终一共 是21 000 000个比特币。</p>
+<p>$$  50\times6\times24\times365\times4\times(1+0.5+0.25)=2100w  $$</p>
+<p>创建区块的节点可以在区 块中一笔特别的交易：<code>造币交易</code>，指定这笔交易的接收地址</p>
+<h4 id="微妙和强大的设计-Subtle-but-powerful-trick">微妙和强大的设计 (Subtle but powerful trick)</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>奖励只有当区块最终被纳入长期共识链才会<code>兑现</code></p>
+</li>
+<li class="lvl-2">
+<p>造币交易和其他每一笔交易一样，只有最终被纳入共识链，才会被其他节点<code>接受</code></p>
+</li>
+</ul>
+<p><code>注意，这是新比特币被允许创造出来的唯一途径，没有任何其他新增币的机制。</code></p>
+<p>比特币区块奖励迟早会发完（比如2140 年） 系统还能继续运行下去吗？可以，因为还有<code>交易费奖励</code></p>
+<h3 id="交易费奖励">交易费奖励</h3>
+<p>随着区块奖励逐渐发完，交易费会变得 日益重要：需要通过交易费(小费)来保障 合理的服务质量</p>
+<h3 id="Challenges">Challenges</h3>
+<ol>
+<li class="lvl-3">
+<p>如何随机选取一个节点？</p>
+</li>
+<li class="lvl-3">
+<p>都来争抢奖励，系统是否会变得不稳定？</p>
+</li>
+<li class="lvl-3">
+<p>攻击(Sybil Attack)： 创建大量的女巫节 点来尝试颠覆整个共识过程</p>
+</li>
+</ol>
+<h3 id="挖矿与工作量证明">挖矿与工作量证明</h3>
+<p>工作量证明 (Proof of Work)权益证明 （proof of stake）把随机选取节点改为<code>根据节点占有某种 资源的比例</code>来选取节点</p>
+<p>计算能力—工作量证明系统(PoW)<br>
+某种币的拥有量—权益证明(PoS, Proof of Stake)</p>
+<p>工作量证明: 算力的竞争比特币：哈希函数谜题：求解nonce</p>
+<p>$$  H(nonceǁprev_{hash}ǁtxǁtxǁ…ǁtx)  $$</p>
+<p>如果一个节点发现一个nonce, 就可以提议创建下一个区块<code>完全去中心化</code>的方式：没有任何人决定谁可以提交下一区块</p>
+<h3 id="哈希谜题三大特性">哈希谜题三大特性</h3>
+<h4 id="难于计算">难于计算</h4>
+<p>2014年底： 产生一个区块：平均要做 1020 运算 挖矿系统需要消耗大量能源</p>
+<h4 id="可参数化成本">可参数化成本</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>成本是通过参数来进行<code>调整</code>的</p>
+</li>
+<li class="lvl-2">
+<p>大约每两个星期（  $ 24\times6\times14=2016 $ 个区块）， 目标区域的难度会调整一次</p>
+</li>
+<li class="lvl-2">
+<p>期望10分钟出一个区块有一个公式可以很好地描述这一点：任何一个矿工，比如爱丽丝，找到下一 区块的概率，就相当于她控制的计算力占整个全球计算力的比例。这意味着，如果爱丽丝 的挖矿设备的计算能力占全部计算能力的0.1%，那大概每产生1 000个区块，她就可以找 到一个区块。</p>
+</li>
+</ul>
+<h4 id="易于证实">易于证实</h4>
+<p>基于哈希函数的单向性：挖矿很难，但容易验证</p>
+<h2 id="2-5-总结">2.5 总结</h2>
+<blockquote>
+<p>如果：</p>
+</blockquote>
+<p>挖矿奖励&gt;挖矿成本</p>
+<blockquote></blockquote>
+<p>那么： 矿工赚钱</p>
+<blockquote></blockquote>
+<p>条件是：</p>
+<blockquote></blockquote>
+<p>挖矿奖励=区块奖励+ 交易费</p>
+<blockquote></blockquote>
+<p>挖矿成本=硬件成本+ 运营成本（电费、空调费等）</p>
+<p>系统的安全性不是来自于P2P网络的完美， 而是来自于<code>区块链和共识协议</code>。</p>
+<p>比特币系统深度使用了分布式共识： <code>拥有比特币</code>就是其他节点对给定的一方拥有这些比特币的<code>共识</code></p>
+<h3 id="启动加密货币">启动加密货币</h3>
+<p>“自举过程”（bootstrapping）</p>
+<p>区块链的安全性、挖矿生态系统的健康程度，货币的价值 之间紧密相连</p>
+<p>虚拟货币想要成功：<code>初始化的自举 (bootstrapping)</code>过程很关键</p>
+<h3 id="51-攻击">51%攻击</h3>
+<p>不能偷币，不能压制其他交易，不能改变区块奖励</p>
+<p>51%攻击主要会摧毁大家对数字货币 （比特币）的<code>信心</code>深度影响的是共识： 不能改变数字签名的确认，交易信息 的广播；仅可以局部‘指鹿为马’</p>
+<h1>Chapter 3 比特币的运行机制</h1>
+<h2 id="目录-2">目录</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>3.1 比特币的交易</p>
+</li>
+<li class="lvl-2">
+<p>3.2 比特币的脚本</p>
+</li>
+<li class="lvl-2">
+<p>3.3 比特币脚本的应用</p>
+</li>
+<li class="lvl-2">
+<p>3.4 比特币的区块</p>
+</li>
+<li class="lvl-2">
+<p>3.5 比特币网络</p>
+</li>
+<li class="lvl-2">
+<p>3.6 限制与优化</p>
+</li>
+</ul>
+<h2 id="3-1-比特币的交易">3.1 比特币的交易</h2>
+<p>Blockchain----Public Ledger 公开账簿</p>
+<p>First Impression: 记账方式</p>
+<p>基于帐户的系统：与银行卡的帐户类似</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208175137.png" alt=""></p>
+<h3 id="问题？">问题？</h3>
+<p>如果要去确认一笔交易是否真实，就必须追溯每一个帐户的余额</p>
+<p>增加一个数据字段，更新每次交易后的账户余额</p>
+<p>但实际不可行：分布式网络，<code>延时确认</code></p>
+<h3 id="解决">解决</h3>
+<p>借鉴了Scroogecoin里面的记账方式<br>
+a <code>transaction-based ledger</code> close to Bitcoin</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208175404.png" alt=""><br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208175418.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208175434.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208175621.png" alt=""></p>
+<p>公钥、身份、PKI, CA, 证书</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208180312.png" alt=""></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>地址转换 (Change Addresses)–处理余额</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>有效验证 (Efficient Verification)–无需从头核查</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>资金合并–支持多输入输出</strong></p>
+</li>
+<li class="lvl-2">
+<p><strong>共同支付–多人数字签名</strong></p>
+</li>
+</ul>
+<h2 id="3-2-比特币的脚本">3.2 比特币的脚本</h2>
+<p>一个比特币交易分成三部分：元数据、一系列的输入和一系列的 输出。</p>
+<p>最常见的比特币交易：通过某人的签名获 得他在前一笔交易中获得的资金</p>
+<p>交易输出描述为：凭借哈希值为X的<code>公钥</code>， 以及这个公钥所有者的<code>签名</code>，才能获得这 笔资金</p>
+<p>把交易的输入脚本(scriptSig)，和上一笔 交易的输出脚本(scriptPubKey)串联起来。串联脚本必须被成功执行以后，才能获 得资金。</p>
+<h3 id="比特币脚本语言">比特币脚本语言</h3>
+<p>Forth: 简单的堆栈式编程语言(stack based)</p>
+<p>每个指令只被执行一次，线性的，无法 循环执行</p>
+<p>非图灵完备<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208182523.png" alt=""></p>
+<p>数据指令 pubKey</p>
+<p>工作码指令 OP_***</p>
+<h3 id="OP-RETURN">OP_RETURN</h3>
+<p>销毁证明（proof of burn）脚本，用于销毁比特币（即防止资金被赎回）。</p>
+<p>使用 OP_RETURN脚本来抛出错误；不论之前指令的运行结果是什么，OP_RETURN指令总会 被执行，并相应抛出一个错误，脚本返回一个“错误”(false)值。</p>
+<p>由于OP_RETURN以抛出错误的形式结束脚本，其后的所有指令都不会执行。利用这 个特性，我们可以往脚本中植入任意信息，这些信息也将被存储在区块链中。假如你想通 过署名或者盖时间戳的方式来证明你在某个时候知道某件事情，就可以发起一笔极小额的 比特币交易，在脚本中加入上述信息，并使用销毁证明脚本将币销毁，这样就可以将信息 永久地存储在区块链上。</p>
+<p>可以随意地为比特币支付设定条件</p>
+<h3 id="Pay-to-Script-Hash-P2SH">Pay-to-Script-Hash P2SH</h3>
+<p>支付给脚本的哈希值</p>
+<p>把比特币支付给某个脚本地址，脚本的 哈希值是×××</p>
+<p>取款的时候，提供上述哈希值对应的脚本，<code>同时</code>提供数据能通过脚本的验证</p>
+<p>支付工作简单化：收款方只需告诉付款方 一个哈希值即可</p>
+<p>P2SH的输出脚本(ScriptPubKey)会变得很小，复杂的事情放在输入脚本(ScriptSig) 里面了</p>
+<h2 id="3-3-比特币脚本的应用">3.3 比特币脚本的应用</h2>
+<h3 id="第三方支付交易-（escrow-transaction）">第三方支付交易 （escrow transaction）</h3>
+<h4 id="MultiSig-（多重签名）">MultiSig （多重签名）</h4>
+<p>三个人中有两个人签名以后，资金才能被 支取</p>
+<p>Alice, Bob; Judy（第三方仲裁）</p>
+<p>发生纠纷的时候</p>
+<h4 id="绿色地址-（green-addresses）">绿色地址 （green addresses）</h4>
+<p>一个交易确认：延迟第三方银行：<br>
+Alice给Bob（传统）<br>
+Alice给Bank : （Alice: 支付Bob这些币，能代办吗？） (Bank: 从你的帐户扣钱，然后从(银行)绿色地址转帐给Bob)</p>
+<p>不是Bitcoin技术系统的保障, 而是现实世界 中银行的声誉保证：不会发生<code>双重支付</code></p>
+<h4 id="高效小额支付（efficient-micro-payments）">高效小额支付（efficient micro-payments）</h4>
+<p>设想手机流量使用场景：按照分钟计费， 但每分钟支付一次不现实<br>
+<strong>Solutions： MULTISIG</strong></p>
+<h4 id="锁定时间（lock-time）">锁定时间（lock_time）</h4>
+<p>等待t时间之后才能把<code>退款</code>交易计入区块链如果过了t时间Bob还没有在最后一个交易 上签名确认；Alice可以通过退款交易收回 所有的Bitcoin</p>
+<h3 id="智能合约-Smart-Contract">智能合约 (Smart Contract)</h3>
+<p>可以用技术手段来强制执行的合约；可以用<code>脚本</code>、<code>矿工</code>、和<code>交易验证</code>来实现 第 三方托管协议或者是小额支付；而不是中心化权威机构</p>
+<h2 id="比特币的区块">比特币的区块</h2>
+<p>把大量交易组织起来放入一个区块，得 到的哈希链会更短；可以提高验证区块 链数据结构的效率</p>
+<p>区块链把两个基于哈希值的数据结构结合起来：</p>
+<ol>
+<li class="lvl-3">
+<p>区块的哈希链</p>
+</li>
+<li class="lvl-3">
+<p>树状结构 把所有交易组织起来（Merkle Tree）<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230208224540.png" alt=""></p>
+</li>
+</ol>
+<p>区块头部还包含了挖矿谜题 [1] 相 关的信息。还记得，区块头部的哈希函数必须以一大堆零开头才有效，此外，区块头部还 要包含一个矿工可以修改的“临时随机数”、一个时间戳和一个点数（点数用来表示找到这 个区块的难度）。区块头部是挖矿过程中唯一哈希值化的，所以要验证一个区块的链，只 要检查区块头部即可。在区块头部唯一的交易数据是交易树的树根——“mrkl_root”。</p>
+<h3 id="币基交易-Coinbase-Transaction">币基交易 (Coinbase Transaction)</h3>
+<ol>
+<li class="lvl-3">
+<p>它永远只有一个单一的输入与单一的输出。</p>
+</li>
+<li class="lvl-3">
+<p>这个交易并不消费之前交易输出的比特币，因此，没有指针指向“上一交易”。</p>
+</li>
+<li class="lvl-3">
+<p>这个输出值目前大约是25个币多一点点。这个输出值就是矿工的挖矿收入。它由两 部分组成：一部分是奖励的25个比特币（奖励在每生产210 000个区块——大概4年——后 减半），另一部分是所有交易的交易手续费。</p>
+</li>
+<li class="lvl-3">
+<p>还有一个特别的地方就是“币基”参数，矿工可以放任何值进去。</p>
+</li>
+</ol>
+<p>创世块是比特币区块链的原始块。也称为块0，它是所有其他块构建 的基础。没有创世块，就不能创建新块，也就没有区块链。 创世块来自比特币的创始人中本聪（Satoshi Nakamoto）。他是用 微软的visual studio和c++编写的， 他从2009年1月3日开始开采，持续了六天；中本聪正在彻底测试创 世块，以确保它是完美的，因为它将永远被硬连接到系统中。</p>
+<h2 id="3-5-比特币网络">3.5 比特币网络</h2>
+<p>所有的节点都是<code>平等</code>的</p>
+<p>发起一个交易： 泛洪Flooding算法 (八卦gossip协议)</p>
+<h3 id="核验新交易信息">核验新交易信息</h3>
+<ol>
+<li class="lvl-3">
+<p>对每个前序交易的输出运行核验脚本</p>
+</li>
+<li class="lvl-3">
+<p>校验是否有双重支付</p>
+</li>
+<li class="lvl-3">
+<p>检查这笔交易信息是不是已经被本节点接收过</p>
+</li>
+<li class="lvl-3">
+<p>节点只会接收和传递在白名单上的标准脚本</p>
+</li>
+</ol>
+<h4 id="竞态条件-（race-condition）">竞态条件 （race condition）</h4>
+<p>哪一个交易被纳入区块链产生分歧(Race condition)</p>
+<p>每个节点默认保留最早接收到的交易 （or Replace-by-fee费用替代策略）</p>
+<blockquote>
+<p>自从2013年，矿工的缺省行为变成了“费用替代策略”, 即节点在遇到有冲突的交 易时，会把交易手续费更高的交易放进自己的交易池，把手续费更低的替换出去。站 在矿工的角度，由于收益更高，因此也是理性的选择——至少在短期看是这样。但是 这种费用替代策略却使多重支付攻击变得更容易了。 因此，费用替代策略受到了不少争议，这些争议一方面从技术层面讨论在费用替 代策略中是否可以真正阻止多重支付；另一方面从哲学层面讨论比特币是不是应该要 尽可能支持零验证，或直接放弃费用替代策略。我们这里就不再赘述这些讨论了很久 的争议了，但最近比特币核心代码倒选用了“有选择权的”（opt-in）费用替代策略的 做法，也就是交易可以标记自己是否适用费用替代策略。</p>
+</blockquote>
+<p>如果两个矛盾的交易或者区块在不同地方发起，向整个网络广播；那么节点接收那个交易取决于它在网络的位置</p>
+<h3 id="区块的传播与交易传播类似">区块的传播与交易传播类似</h3>
+<p>竞态条件的限制：哪个区块被纳入长期共识链取决于其他节点<code>选择</code>在哪个区块上扩展区块链</p>
+<p>核验一个区块：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>确认区块头部；</p>
+</li>
+<li class="lvl-2">
+<p>确定哈希值在<code>给定范围</code>；</p>
+</li>
+<li class="lvl-2">
+<p>确认区块里面的<code>每个</code>交易；</p>
+</li>
+<li class="lvl-2">
+<p><code>最长</code>的一条区块链进行扩展</p>
+</li>
+</ul>
+<p>存储空间需求</p>
+<p>全节点：需要把完整的共识区块链存储下来</p>
+<p>2022年10月16日 BTC 链为432 GB</p>
+<h3 id="轻量节点-nightweight-nodes-也叫简单付款验证-Simple-Payment-Verification">轻量节点(nightweight nodes) 也叫简单付款验证(Simple Payment Verification)</h3>
+<p>简称SPV客户端只存储他们所关心的，需要进行核验的部分交易</p>
+<p>SPV节点<code>只验证相关交易</code>；依赖全节点去 验证网络上的其他所有交易</p>
+<p>只需要几十MB数据(VS 几十GB or More)</p>
+<h2 id="3-6-限制与优化">3.6 限制与优化</h2>
+<p>比特币的总体数量与记账奖励社区内基 本达成共识：<code>不应该改变</code></p>
+<p>交易性能： 7笔/秒 (Calculation)</p>
+<blockquote>
+<p>每个区块大小限定在1MB，每个交易大约是 250字节，所以每块最多容纳4 000个交易。平均每隔10分钟，有一个矿工获得记账权利， 所以每秒钟只能处理7个交易</p>
+</blockquote>
+<p>Limitation: Visa 2000 笔/秒</p>
+<h4 id="Weakness-of-Crypto-Suite">Weakness of Crypto Suite</h4>
+<p>ECDSA &amp; Hash function</p>
+<p>担心在一生中，这些算法可能会被攻破</p>
+<p>Reference: ABCMint 抗量子攻击</p>
+<h3 id="修订协议">修订协议</h3>
+<p>修订协议：无法假定所有节点都会更新版</p>
+<h4 id="硬分叉">硬分叉</h4>
+<p>引入新的特性，使得前一版本的协议失效</p>
+<h4 id="软分叉">软分叉</h4>
+<p>加入新特性，让现有的核验规则更加严格。老的节点依然会接受所有的区块，而新的节点会拒绝</p>
+<p>向下兼容–P2SH</p>
+<p>MULTISIG的Bug: 推送给堆栈一个无用的值。但修复这个缺陷，会产生<code>硬分叉</code></p>
+<p>如何改变区块大小：难以达成共识</p>
+<p>提高（区块链系统）交易处理能力</p>
+<h1>第4章 如何储存和使用比特币</h1>
+<h2 id="目录-3">目录</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>4.1 简单的本地存储</p>
+</li>
+<li class="lvl-2">
+<p>4.2 热存储与冷存储</p>
+</li>
+<li class="lvl-2">
+<p>4.3 密钥分存和密钥共享</p>
+</li>
+<li class="lvl-2">
+<p>4.4 在线钱包和交易所</p>
+</li>
+<li class="lvl-2">
+<p>4.5 支付服务</p>
+</li>
+<li class="lvl-2">
+<p>4.6 交易费</p>
+</li>
+<li class="lvl-2">
+<p>4.7 货币兑换市场</p>
+</li>
+</ul>
+<h2 id="4-1-简单的本地存储">4.1 简单的本地存储</h2>
+<p>存储比特币其实就是如何保存和管理比特币<code>私钥</code></p>
+<ol>
+<li class="lvl-3">
+<p>可获取性</p>
+</li>
+<li class="lvl-3">
+<p>安全性</p>
+</li>
+<li class="lvl-3">
+<p>便利性</p>
+</li>
+</ol>
+<h3 id="比特币钱包软件">比特币钱包软件</h3>
+<p>管理比特币和私钥信息并让你方便使用的一个应用软件</p>
+<h3 id="编码解码（encoding-keys）：Base58编码和二维码">编码解码（encoding keys）：Base58编码和二维码</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Base58编码</p>
+</li>
+<li class="lvl-2">
+<p>Base64是一种基于64个可打印字符来表 示二进制数据的表示方法</p>
+</li>
+<li class="lvl-2">
+<p>包含58个字符的字符集：去掉几个比较 容易混淆的字母</p>
+</li>
+<li class="lvl-2">
+<p>相比Base64，Base58不使用数字&quot;0&quot;，字 母大写&quot;O&quot;，字母大写&quot;I&quot;，和字母小写&quot;l&quot; ，以及&quot;+“和”/&quot;符号</p>
+</li>
+</ul>
+<p>设计Base58主要的目的：</p>
+<ol>
+<li class="lvl-3">
+<p>避免混淆。在某些字体下，数字0和字母大写 O，以及字母大写I和字母小写l会非常相似。</p>
+</li>
+<li class="lvl-3">
+<p>不使用&quot;+“和”/&quot;的原因是非字母或数字的字符 串作为帐号较难被接受。</p>
+</li>
+<li class="lvl-3">
+<p>没有标点符号，通常不会被从中间分。</p>
+</li>
+<li class="lvl-3">
+<p>大部分的软件支持双击选择整个字符串。</p>
+</li>
+</ol>
+<p>QR码：帐户交易处理更方便</p>
+<h3 id="虚荣地址-Vanity-Address">虚荣地址 (Vanity Address)</h3>
+<p>How to Generate this type of Address? 只能尝试</p>
+<p>How to Speedup?<br>
+$$  g^{𝑥+1} = g ∗ g^x  $$   椭圆曲线点乘优</p>
+<h2 id="热存储和冷存储">热存储和冷存储</h2>
+<h3 id="热存储">热存储</h3>
+<p>存放在个人电脑里（像把钱放在钱包里）方便但不安全</p>
+<h3 id="冷存储">冷存储</h3>
+<p>不联入互联网，封存起来（像保险箱），安全性高但不方便</p>
+<h3 id="分层确定性钱包（hierarchical-deterministic-wallet）">分层确定性钱包（hierarchical deterministic wallet）</h3>
+<p>让冷存储端制造很多的地址数量，通过 一个短暂的一次性的交换，热存储端就 可知晓所有地址 Crypto technique（同步）</p>
+<p>对每个i而言，第i个地址和第i个私钥相匹 配</p>
+<p>一长串配对的公私钥<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230210160319.png" alt=""><br>
+注：冷储存端生成和保存私钥生成信息和地址生成信息，然后将地址生成信息一次性转给热储存端。当 热储存端要给冷储存端转账时，就按次序生成新的地址。冷储存端上线后，也会按顺序生成地址，然后 查收相应地址收到的款项，直到某一地址没有收款位置。如果冷储存端需要向热储存端转账，它就会按 顺序生成私钥序列。</p>
+<h3 id="分层确定性钱包：技术方案">分层确定性钱包：技术方案</h3>
+<p>一个ECDSA私钥是一个随机数x，其对应的公钥是  $ g^x $ 。为了生成分层确定性密钥，我们需要另外两个随机数k和y。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>私钥生成信息:k,x,y</p>
+</li>
+<li class="lvl-2">
+<p>第i个私钥:x=y+H(k‖i)</p>
+</li>
+<li class="lvl-2">
+<p>地址生成信息:k,  $ g^y $</p>
+</li>
+<li class="lvl-2">
+<p>第i个公钥:  $ g^{xi}=g H(k‖i) ·g^y $</p>
+</li>
+<li class="lvl-2">
+<p>第i个地址: $ H(g{xi}) $</p>
+</li>
+</ul>
+<h4 id="分层确定性钱包：安全性分析">分层确定性钱包：安全性分析</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>𝑔𝑔𝑦𝑦 can’t deduce 𝑦𝑦, and also 𝑥𝑥𝑖𝑖 (𝑖𝑖-th private key)</p>
+</li>
+<li class="lvl-2">
+<p>Because of DLP (Discrete Logarithm Problem)</p>
+</li>
+</ul>
+<h3 id="大脑钱包-（brain-walle）">大脑钱包 （brain walle）</h3>
+<p>这种方式下，你通过一个密码就可 以支取比特币。</p>
+<p>大脑钱包的主要原理是用一个可预测的算法把一个口令变成一对公钥/私钥。</p>
+<blockquote>
+<p>有一种简便的方法可以生成口令：从最常用的10 000英语词汇中，随机选择6个 词，从而生成大致80位长度的字节 $ [6×log2 (10 000)大致等于80] $ 。很多人发现这个方法 比随机取字母容易记忆，因为这种方法生成的口令通常是下面这样子的： worn till alloy focusing okay reducing earth dutch fake tired dot occasions</p>
+</blockquote>
+<h4 id="让攻击者尝试密钥破解的速度变慢">让攻击者尝试密钥破解的速度变慢</h4>
+<p>Key Stretching 密钥延展重复计算SHA256 ( $ 2^{20 } $ Trials)<br>
+$$ SHA256<sup>{2</sup>{20}} (Password) ==  OpenValue $$</p>
+<h3 id="纸钱包">纸钱包</h3>
+<p>把密钥印在纸上，然后把纸锁在保险箱里面</p>
+<h3 id="防损硬件（tamper-resistant-device）">防损硬件（tamper-resistant device）</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用来保存密钥或者用来生成密钥；</p>
+</li>
+<li class="lvl-2">
+<p>此类设备不会泄漏密钥或者输出密钥；</p>
+</li>
+<li class="lvl-2">
+<p>一旦设备丢失或者被盗，马上能察觉。</p>
+</li>
+</ul>
+<h2 id="4-3-密钥分存和密钥共享">4.3 密钥分存和密钥共享</h2>
+<p>把密钥保存在一个地方：一损俱损</p>
+<p>分散风险： 密钥分存</p>
+<p>密钥被分成N个片段，如果获得其中的K个片段就可以把原密钥重新还原。如果片段数目 少于K, 不能知道密钥的任何信息。</p>
+<p><strong>不能直接分割密钥！ 否则每一个片段会透露密钥的部分信息， 降低了搜索复杂度</strong></p>
+<p>N=2, K=2</p>
+<p>Solutions?</p>
+<p>R and R XOR S</p>
+<p>Extension to N=K case</p>
+<blockquote>
+<p>举个例子，我们设定N=2，K=2，意味着我们把想要加密的密钥（原密钥）转换成两 个子密钥，只有同时获得这两个子密钥才能拼出原密钥。我们把原密钥称为S，S是一个 很大的数字（比如128位）。然后，我们可以随机产生另一个128位的数字R，让R作为其 中的一个子密钥，那么另外一个子密钥就是S⊕R（⊕代表逻辑算符互斥，exclusive OR， 或缩写成XOR，也叫异或），我们把S⊕R称为“密文”。然后，我们把子密钥R和密文 S⊕R保存在两个不同的地方。单独根据子密钥R或密文都无法知晓原来密钥的任何信息， 但如果我们同时得到R和S⊕R，我们可以通过异或逻辑运算得到原来的密钥。 N和K相等时，我们总是可以这样做：对于之前的K-1个子密钥，我们可以生成N-1不 同的随机数，最后一个子密钥就是原密钥与所有其他N-1个子密钥的异或。但如果N大于K 的话，这个技巧就行不通了。我们需要借助其他代数方法。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230210163306.png" alt=""><br>
+注：S代表原密钥，被编码成一个大的整数，图中斜线的斜率随机。斜线上的点（主要是它们的Y坐标 S+R，S+2R，…）代表子密钥。连接任何两个点，都可以得到S $ [两点连线，延长，与Y轴的交点就是S（黑 点）] $ 。若是只有一个点，又无法确定斜率（斜率随机），就无法得到S。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230210163952.png" alt=""></p>
+<p>拉格朗日公式表明，如果要回归一条自由度为k-1的曲线，需要获得至少K 个点。</p>
+<p><strong>如果我们将 原密钥转换成N个子密钥，除非黑客获得了K-1个子密钥，否则原密钥就是安全的，换个 说法，我们最多可以承受N-K个子密钥被泄露。</strong></p>
+<h3 id="门限密码（threshold-cryptography）">门限密码（threshold cryptography）</h3>
+<p>两个子密钥分别保存在个人电脑和手机上；</p>
+<p>电脑生成一个签名片段，发送到你手机上；</p>
+<p>手机利用它的子密钥完成整个签名。</p>
+<h3 id="多重签名（multisignatures）">多重签名（multisignatures）</h3>
+<p>比如：一个交易需要5个人至少3个人签名才能完成</p>
+<p>多重签名可以妥善的管理在冷存储端的 数字资产；需要多人参与才能实现</p>
+<h2 id="4-4-在线钱包和交易所">4.4 在线钱包和交易所</h2>
+<h3 id="在线钱包">在线钱包</h3>
+<p>在线钱包可以在各种场合应用，但真正 的钱包信息存储在云端</p>
+<p><a target="_blank" rel="noopener" href="http://Blockchain.info">Blockchain.info</a></p>
+<p>网站存储着你的密钥，至少能够接触到 你的密钥</p>
+<p>安全前提：网站服务提供商可以信任</p>
+<h3 id="数字货币（比特币）交易所">数字货币（比特币）交易所</h3>
+<p>银行的功能：面向个人存取款</p>
+<p>银行会把钱用于投资；储备金</p>
+<p>数字货币交易所在交易前后，数字货币并没 有真正在区块链中移动，只是你和银行的合 约变化了</p>
+<h4 id="优缺点">优缺点</h4>
+<p>优点：把数字货币（比特币）和法币经济 结合，实现自由转换</p>
+<p>风险：</p>
+<ol>
+<li class="lvl-3">
+<p>挤兑</p>
+</li>
+<li class="lvl-3">
+<p>庞式骗局</p>
+</li>
+<li class="lvl-3">
+<p>黑客入侵</p>
+</li>
+</ol>
+<h3 id="监管">监管</h3>
+<h4 id="银行监管">银行监管</h4>
+<p>政府要求银行有一个最低准备金要求： 需要3%-10%的现金应对突发提款需求</p>
+<p>政府对银行进行监管，必要时为银行或 者储蓄者提供保护</p>
+<h4 id="准备金证明">准备金证明</h4>
+<p>向储户证明留存了一部分储备金，消除投 资人的担心</p>
+<p>如何证明你(交易所)有 $ 10^6 $ 的数字准备金？</p>
+<p>发起一笔转账交易，收款方为本人；利用 私钥签名</p>
+<h4 id="负债证明（proof-of-liabilities）">负债证明（proof of liabilities）</h4>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230210170402.png" alt=""><br>
+我们需要为每个节点添加一个字段（下文简称为存 款金额字段），这个字段显示其最近的两个子节点的存款金额之和。</p>
+<blockquote>
+<p>注：交易所构建这样一棵梅克尔树：每个储户对应一个叶节点，每个叶节点的存款金额字段保存储户存 款金额。每个节点的存款金额字段等于与其最相近的两个子节点的存款金额之和，这样，根节点的存款 金额字段就代表着存款总规模。每个储户都可以要求交易所证明该储户在梅克尔树上，并且可以核实根 节点所显示的总存款规模。</p>
+</blockquote>
+<p>每个客户可以向交易所索要<code>存款证明</code></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230210170929.png" alt=""></p>
+<ol>
+<li class="lvl-3">
+<p>子树根节点的哈希指针和存款金额字段，与交易所广播的值一致。</p>
+</li>
+<li class="lvl-3">
+<p>从子树的根节点遍历到叶节点，每个节点对应的哈希值确实是其所指向的子节点的 哈希值。</p>
+</li>
+<li class="lvl-3">
+<p>每个叶节点对应的客户账号信息（客户名、账号和存款金额）都是正确无误的。</p>
+</li>
+<li class="lvl-3">
+<p>每个节点的存款金额字段正好等于与其最相近的子节点的存款金额之和。</p>
+</li>
+</ol>
+<p>交易所证明了其至少留存了X数字货币</p>
+<p>之后证明其吸收的存款规模至多是Y数字 货币</p>
+<p>可让所有人能独立审计验证: 准备金下限: X/Y</p>
+<h2 id="4-5-支付服务">4.5 支付服务</h2>
+<h3 id="如何接受数字货币付款">如何接受数字货币付款</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户可以用数字货币(比如比特币)购物</p>
+</li>
+<li class="lvl-2">
+<p>商户如期收到法定货币(比如美元)</p>
+</li>
+<li class="lvl-2">
+<p>支付服务商获得手续费</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230210171916.png" alt=""></p>
+<p>支付服务商承担了所有风险</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>安全风险：好的安全措施来管理数字货币</p>
+</li>
+<li class="lvl-2">
+<p>汇率风险: (比如 数字货币 与法定货币 之间 兑换的汇率波动)</p>
+</li>
+</ul>
+<p>另外一方面：如果支付商解决了这些问题，可从每笔交易中收取可观的利润</p>
+<h2 id="4-6-交易费">4.6 交易费</h2>
+<p>交易费=交易的输入金额-交易的输出金额</p>
+<p>比特币网络中，传播你的交易信息需要成本</p>
+<p>比如区块中打进一笔你的交易，区块就会变大， 也会花费更多的时间传输到其他节点</p>
+<p>确认你的交易需要花费代价：交易费用来补偿矿 工处理交易付出的代价</p>
+<p>通常而言，如果支付了更多的交易费，那 么交易会被更快，更可靠的传播和记录</p>
+<h3 id="默认的交易费政策">默认的交易费政策</h3>
+<p>现在大部分矿工所默认的交易费是这样计算的：首先，如果交易满足以下三个条件， 那就<code>不需要支付交易费</code>：</p>
+<ol>
+<li class="lvl-3">
+<p>交易小于1 000个字节。</p>
+</li>
+<li class="lvl-3">
+<p>所有输出为0.01BTC或更大。</p>
+</li>
+<li class="lvl-3">
+<p>优先权足够高。(所有输入的账龄的总和×输入金额）/交易规模</p>
+</li>
+</ol>
+<blockquote>
+<p>，当前默认标准是：每1 000个字节需要支付 0.0001BTC，在2015年，这相当于每1 000个字节花费1美分的交易费，一笔交易通常包 括：输入通常是148个字节，每个输出通常是34个字节，其他信息10个字节。如果一笔交 易有两个输入和两个输出，那么这笔交易的大小是400个字节。</p>
+</blockquote>
+<p>通常需要支付一笔标准的交易费用； 大多数矿工强制要求必须包含交易费用</p>
+<h2 id="4-7-货币兑换市场">4.7 货币兑换市场</h2>
+<p>比特币市场中的公允价格是由<code>供给和需求</code>决定的</p>
+<p>比特币的需求包括将比特币作为支付中 介，以及作为投资需求</p>
+<h3 id="一个简单的市场行为模型">一个简单的市场行为模型</h3>
+<p>根据供需平衡来决定比特币价格：假设P 是比特币对美元的价格</p>
+<p>供应侧：D秒内，市场内有S个比特币可 以进行交易</p>
+<p>需求侧：总共的支付交易规模是T美元</p>
+<p>𝑆/𝐷 = 𝑇/𝑃 意味着 P ∝ T</p>
+<h1>第5章 比特币挖矿（bitcoin mining）</h1>
+<h2 id="目录-4">目录</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>5.1 比特币矿工的任务</p>
+</li>
+<li class="lvl-2">
+<p>5.2 挖矿所需硬件</p>
+</li>
+<li class="lvl-2">
+<p>5.3 能源消耗和生态环保</p>
+</li>
+<li class="lvl-2">
+<p>5.4 矿池</p>
+</li>
+<li class="lvl-2">
+<p>5.5 挖矿的激励和策略</p>
+</li>
+</ul>
+<h2 id="5-1-比特币矿工的任务">5.1 比特币矿工的任务</h2>
+<p>为了挖矿，加入比特币网络，完成任务</p>
+<ol>
+<li class="lvl-3">
+<p>监听交易广播；</p>
+</li>
+<li class="lvl-3">
+<p>维护区块链网络和监听新的区块；</p>
+</li>
+<li class="lvl-3">
+<p>组装一个备选区块；</p>
+</li>
+<li class="lvl-3">
+<p><code>找到一个有效的随机数</code>；</p>
+</li>
+<li class="lvl-3">
+<p>希望你的区块被全网接受；</p>
+</li>
+<li class="lvl-3">
+<p>利润</p>
+</li>
+</ol>
+<p>第一类任务: 验证交易和区块</p>
+<p>比特币网络赖以生存和运转的基础</p>
+<p>第二类任务：竞争出块并获得奖励</p>
+<p>鼓励矿工去完成第一类任务而设置</p>
+<h3 id="寻找有效区块">寻找有效区块</h3>
+<p>矿工首先从个人交易池中选出一系列有效的交易-&gt;Merkel Tree<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230211103111.png" alt=""><br>
+矿工： 挖矿通常使nonce 从0开始，每次增 加1， 直到使得区块有效(Consecutive 0s in the front)</p>
+<p>nonce : 32 bit</p>
+<p>如何满足挖矿难度? (比如72个头部连续的0)</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230211103212.png" alt=""></p>
+<blockquote>
+<p>当改变币基里的随机数后，整个梅克尔树上交易的哈希值都会改变（见图5.2），因 为币基值的改变会向上传递，所以改变币基的随机数值比改变头部随机数值的代价要大很 多。正因为如此，矿工大部分时间只改动头部的随机数，只有在遍历头部2 32 个随机数值 且还没有找到一个有效区块时，才改动币基的随机数</p>
+</blockquote>
+<p>如果遍历nonce的取值空间还没有找到一 个有效区块时，改动coinbase中的随机数</p>
+<p>正确的临时随机数组合：头部随机数 (nonce)+币基随机数(coinbase)</p>
+<p>立即宣布：希望得到出块奖励</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>求解谜题不同 :每个矿工会把数目不同、次序不同的交 易放进区块；币基交易里，接收地址通常 也不一样</p>
+</li>
+<li class="lvl-2">
+<p>区块难度相同</p>
+</li>
+</ul>
+<h3 id="决定难度">决定难度</h3>
+<p>每挖出2 016个区块，挖矿难度会改变一次，这个周期大约是两个星期。难度的改变 是根据上2 016个区块的挖矿效率来决定的。用下列公式来表达：<br>
+$$ 下一个难度=\frac{上一个难度\times2016\times10分钟}{产生上2016个区块所花费的时间} $$</p>
+<h2 id="5-2-挖矿所需硬件">5.2 挖矿所需硬件</h2>
+<p>SHA-256的 设计来自美国国家安全局（NSA）</p>
+<h3 id="CPU挖矿">CPU挖矿</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230211103906.png" alt=""><br>
+CPU挖矿 个人电脑： 20MH/s 2015年难度水平： 267 大约要几十万年找到一个区块！</p>
+<h3 id="GPU">GPU</h3>
+<p>GPU挖矿</p>
+<p>图形处理器(GPU) 适合做数据密集型的 计算；适合并行</p>
+<p>CPU 驱动多个GPU</p>
+<p>2015年 ： 200MH/S<br>
+100块显卡集成在一起进行运算</p>
+<p>非常耗电</p>
+<p>大约要几百年才能找到一个有效区块！</p>
+<h3 id="现场可编程门阵列-Field-Programmable-Gate-Array，简称FPGA">现场可编程门阵列(Field-Programmable Gate Array，简称FPGA)</h3>
+<p>精心设计： 1GH/s</p>
+<p>100块 FPGA 板</p>
+<p>100年才能找到一个有效 区块</p>
+<p>故障和报错；性能功耗比方面不理想</p>
+<h3 id="专用集成电路技术挖矿-ASIC">专用集成电路技术挖矿 (ASIC)</h3>
+<p>应用需求驱动</p>
+<p>集成电路芯片：需要专业的知识，设计 的芯片寿命十分短暂</p>
+<p>运营成本很高(电力、冷却)</p>
+<h3 id="如今：专业挖矿的天下">如今：专业挖矿的天下</h3>
+<p>大型专业挖矿中心：专门运营</p>
+<p>采购打过折的功效更高的ASIC矿机</p>
+<p>建立挖矿中心的三个重要因素：</p>
+<p><code>气候</code>、<code>电费</code>、<code>网络接入速度</code></p>
+<p>格鲁吉亚、冰岛；中国内蒙古</p>
+<h3 id="未来">未来</h3>
+<p>ASIC和专业挖矿中心违反了当时设计的初衷：完全去中心化的系统</p>
+<p>另类币的挖矿发展轨迹：也许谜题会变，但是循环周期类似 CPU-&gt;GPU-&gt;FPGA-&gt;ASIC-&gt;…</p>
+<h2 id="5-3-能源消耗和生态环保">5.3 能源消耗和生态环保</h2>
+<p>每进行一个不可逆的bit flip（数位）运算就会消耗能源</p>
+<p>比特币的挖矿过程必定消耗能源</p>
+<ol>
+<li class="lvl-3">
+<p>内涵能源 （生产矿机）</p>
+</li>
+<li class="lvl-3">
+<p>电能 （挖矿）</p>
+</li>
+<li class="lvl-3">
+<p>冷却 （防止矿机出故障）</p>
+</li>
+</ol>
+<h3 id="能耗预估">能耗预估</h3>
+<h4 id="自上而下">自上而下</h4>
+<p>2015<br>
+收入用来支付电能</p>
+<p>每秒所有的11美元收入购买电费，可以 购买367 百万焦耳</p>
+<p>MW 数量级（几百万瓦特 （megawatt，简称MW））</p>
+<h4 id="自下而上">自下而上</h4>
+<p>最好的矿机：1W—3G/s</p>
+<p>全网算力是350PH/s ----》每秒中全网计算消耗 117 MW</p>
+<p>总而言之，比特币挖矿当时（2015）是 MW的数量级</p>
+<h3 id="比特币挖矿—浪费能源？">比特币挖矿—浪费能源？</h3>
+<blockquote>
+<p>比特币这种“浪费”能源的形式经常被人诟病，因为SHA-256的运算没有其他任何用 处。但是我们必须认识到任何一种支付系统都需要能源和电力的消耗。就拿传统的货币来 说，纸币印刷、ATM机器的运行、硬币分类机器、点钞机、支付服务系统以及运送现钞 和金条的武装押运车，无一不在消耗各种能源。你也可以一样说这些能源的消耗除了维护 整个货币体系之外，也没有任何其他用处。所以，如果我们认可比特币作为一个有用的货 币体系，那么支持比特币体系的能耗就不能认为是浪费。</p>
+</blockquote>
+<h3 id="能源的循环使用">能源的循环使用</h3>
+<p>能源的循环使用—数据火炉(Data Furnace)</p>
+<h3 id="将电力转换成现金">将电力转换成现金</h3>
+<h2 id="5-4-矿池">5.4 矿池</h2>
+<h3 id="单个矿工的挖矿风险">单个矿工的挖矿风险</h3>
+<p>发现区块的数目可以用帕松分布(Poisson distribution)来逼近<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230211110147.png" alt=""><br>
+Binomial distribution can be approximated by the Poisson distribution</p>
+<p>比如你用6000 US Dollars买了一台矿机根据矿机性能，平均每14个月找到一个区块𝜆= 6/7</p>
+<p>对于一个小矿工而言，挖矿就是赌博游戏</p>
+<h3 id="矿池：比特币矿工互相之间的保险">矿池：比特币矿工互相之间的保险</h3>
+<p>一组矿工可以形成一个矿池共同挖矿，并指定一个币基接收人——<code>矿池管理员</code></p>
+<p>矿工通过输出<code>挖矿工分</code>来证明他的工作量</p>
+<p>比如目标值前面有67个0；一个合格的工 分需要40-50个0</p>
+<p>矿池管理员根据大家的工作量按照比例 分配奖励</p>
+<h3 id="分红方案">分红方案</h3>
+<h4 id="工分分红">工分分红</h4>
+<p>矿工发送工分，管理员马上支付奖励</p>
+<p>管理员承担了所有风险</p>
+<h4 id="按实际比例分红">按实际比例分红</h4>
+<p>每次找到一个有效区块，区块奖励按照矿工工作量按比例分配；</p>
+<p>降低管理员风险</p>
+<h3 id="矿池跳换">矿池跳换</h3>
+<p>投机矿工： 挖矿早期(上一个区块刚刚被发现)加入按实际 比例分红的矿池； 挖矿后期跳到一个按工分分红的矿池。</p>
+<h4 id="研究问题：如何设计一个矿池方案，避免矿工的投机？">研究问题：如何设计一个矿池方案，避免矿工的投机？</h4>
+<p>根据最近若干个工分提交的结果才分配</p>
+<h4 id="51-矿池">51%矿池</h4>
+<p>实际上的算法可 能集中在几个大 的机构手中，即 使‘洗算力’</p>
+<h3 id="优缺点-2">优缺点</h3>
+<h4 id="优点-2">优点</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>小矿工容易参与，也有一定的收益；</p>
+</li>
+<li class="lvl-2">
+<p>网络管理员负责组装区块，网络更新变得更加容易</p>
+</li>
+</ul>
+<h4 id="缺点">缺点</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>（算力）中心化管理；</p>
+</li>
+<li class="lvl-2">
+<p>整个网络中进行校验交易的全节点数目在下降</p>
+</li>
+</ul>
+<h2 id="5-5-挖矿的激励和策略">5.5 挖矿的激励和策略</h2>
+<p><strong>我们假设一个运行非默认策略的矿工 掌控一定的比特币网络挖掘市场份额，设为α。</strong></p>
+<p>在挑选一个区块开挖之前，矿工做策略上的 选择：</p>
+<ol>
+<li class="lvl-3">
+<p>需要包括哪些交易？ <code>（优先选择交易费高的交易） </code></p>
+</li>
+<li class="lvl-3">
+<p>对哪一个区块进行挖矿运算？ <code>（优先选择最长的区块链上继续下挖）</code></p>
+</li>
+<li class="lvl-3">
+<p>在同一高度的多个区块中做选择？ <code>（优先选择被监听到的那一个区块）</code></p>
+</li>
+<li class="lvl-3">
+<p>什么时候宣布新的区块？    <code>（默认做法是立刻宣布）</code></p>
+</li>
+</ol>
+<h3 id="分叉攻击-forking-attack">分叉攻击(forking attack)</h3>
+<p>双花：重复支付</p>
+<blockquote>
+<p>一个恶意的矿工给受害者鲍勃发送了一些比特币来购买其服务和货品。然后这个矿工进行了一个分 叉攻击，创建了一个包含冲突交易的更长的分叉，在新的共识链中给鲍勃的支付就变成了无效的交易。</p>
+</blockquote>
+<h4 id="51-是必要的吗？">51%是必要的吗？</h4>
+<p>51%会影响大家对‘去中心化’的信任</p>
+<p>实际上，稍低算力也可以发起攻击，因 为有网络拥塞、延迟等因素</p>
+<p>中心化的攻击者能够快速通信从而节省 一些算力</p>
+<h3 id="贿赂攻击">贿赂攻击</h3>
+<p>有别于直接获得算力，攻击者贿赂已经 具有算力的人，以分叉出一条最长链</p>
+<h3 id="临时保留区块攻击-自私挖矿-（selfish-mining）">临时保留区块攻击(自私挖矿)（selfish mining）</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230211111101.png" alt=""><br>
+这里面的关键是你需要运气好到连续发现两个区块</p>
+<h3 id="黑名单与惩罚分叉攻击">黑名单与惩罚分叉攻击</h3>
+<p>宣布拒绝在包含来自该地址的交易的区块链上工作； （类似美国制裁伊朗）</p>
+<h3 id="羽量级分叉">羽量级分叉</h3>
+<p>如果胆敢把来自地址X的交易加入自己的区块，便有 𝛼𝛼2的可能会丧失自己已经发现的区块</p>
+<h3 id="其他">其他</h3>
+<p>目前，区块奖励在矿工收入里面占比超 过99%；</p>
+<p>但是区块奖励每4年减半，最终出块奖励 会变得很低；</p>
+<p>从长期来看，比特币奖励将从固定的挖 矿奖励为主，转变为交易费为主</p>
+<h1>第6章 比特币和匿名性</h1>
+<h2 id="目录-5">目录</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>6.1 匿名的基础知识</p>
+</li>
+<li class="lvl-2">
+<p>6.2 如何对比特币去匿名化</p>
+</li>
+<li class="lvl-2">
+<p>6.3 混币</p>
+</li>
+<li class="lvl-2">
+<p>6.4 分布式混币</p>
+</li>
+<li class="lvl-2">
+<p>6.5 零币和零钞</p>
+</li>
+</ul>
+<h2 id="6-1-匿名的基础知识">6.1 匿名的基础知识</h2>
+<h3 id="匿名的定义">匿名的定义</h3>
+<p>匿名（Anonymity）：无关联性的化名比特币系统中，使用者不需要使用真实 的姓名</p>
+<p>需要使用公钥哈希值作为交易标识</p>
+<p>一个用户可以随机创建出任意多个比特 币地址</p>
+<p>比特币具有化名性，但是<strong>不能达到绝对隐私</strong></p>
+<p>使用数字货币（如比特币）支付时，在 真实的物理世界里容易暴露身份，进而 关联到地址，以及其他所有的交易</p>
+<h3 id="无关联性">无关联性</h3>
+<ol>
+<li class="lvl-3">
+<p>同一个用户的不同地址应该不易关联。</p>
+</li>
+<li class="lvl-3">
+<p>同一个用户的不同交易应该不易关联。</p>
+</li>
+<li class="lvl-3">
+<p>一个交易的交易双方应该不易关联。</p>
+</li>
+</ol>
+<p>区块链货币中，所有交易都记录在一个 公开账本上，也就是说相关交易信息可 以永久追踪</p>
+<p>希望能够达到传统银行能够达到的隐私 保护级别，降低公共区块链带来的信息 暴露风险</p>
+<p>超越传统银行给我们的隐私保护级别</p>
+<h3 id="匿名化和去中心化">匿名化和去中心化</h3>
+<p>Chaum的电子现金系统，采用了盲签名技术，但还需一个中央权威机构</p>
+<p>Zerocoin， Zerocash：匿名化&amp;去中心化 的加密数字货币系统</p>
+<h2 id="6-2-如何对比特币去匿名化">6.2 如何对比特币去匿名化</h2>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213075710.png" alt=""><br>
+一个地址簇 (clustering of addresses)。一般来说，如果一个新地址的输出，和该地址簇中的任何一个已知地址被一 起花费，那么这个新的地址也将会被加到该地址簇中去。</p>
+<p><code>交易图谱分析 （transaction graph analysis）</code></p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213075849.png" alt=""></p>
+<h3 id="网络层的去匿名化">网络层的去匿名化</h3>
+<p>“第一个通知交易的节点很有可能就 是交易源头”。当有多个节点配合并且对同一个交易源头进行识别的时候，这种方法的实际效果会更加 明显。</p>
+<h2 id="6-3-混币">6.3 混币</h2>
+<h3 id="混币准则">混币准则</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213082937.png" alt=""><br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213082954.png" alt=""></p>
+<h2 id="6-4-分布式混币-（Decentralized-Mixing）">6.4 分布式混币 （Decentralized Mixing）</h2>
+<p>采用一种用户之间的<strong>点对点</strong>模式实现混币交易的协议</p>
+<h3 id="合币-（Coinjoin）">合币 （Coinjoin）</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213090246.png" alt=""></p>
+<h3 id="高风险交易流（high-level-flows）">高风险交易流（high-level flows）</h3>
+<p>为了完成一笔支付，用户通常会组合所 拥有的数字货币，这样便有足够数额可 以支付到单一接收地址</p>
+<p>规避：所有输入地址被<strong>关联</strong>在一起</p>
+<p>合 并规避 （merge avoidance）</p>
+<p>这种合并规避协议通过允许接收方提供多个输出地址的方式（尽可能多 的），使得无关联性成为可能。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213091614.png" alt=""></p>
+<h2 id="6-5-零币和零钞">6.5 零币和零钞</h2>
+<p>基础币 （Basecoin）是一种类似 于比特币的另类币，而零币是这种数字货币的一种延伸，其所提供的匿名性的核心特点在 于，你可以将基础币和零币进行来回转换，并且当你这么做的时候，就打破了旧的基础币 和新的基础币之间的关联。</p>
+<h3 id="零知识证明-Zero-Knowledge-Proof">零知识证明(Zero Knowledge Proof)</h3>
+<p>证明者(Prover)要 让验证者(Verifier)相信自己拥有某种知识 ，但又不泄漏它</p>
+<p>很多场景中有着广泛的应用，比如金融 交易中，保护支付方、接收方、交易金 额的隐私</p>
+<p>Example 1. A Key to a Door<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213140322.png" alt=""><br>
+Example 2. Coloring Problem<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213140341.png" alt=""></p>
+<h3 id="交互式零知识证明的一般模型">交互式零知识证明的一般模型</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213140424.png" alt=""><br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213140517.png" alt=""><br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213140638.png" alt=""></p>
+<p>例如，假设你已经做了很 多工作解决了一个哈希谜题，并且你想要向其他人证明你做到了。换而言之，你想要证 明“我做到了”这个声明。 I know x such that H(xǁ〈other known inputs〉)&lt;〈target〉 当然，你可以展示上述公式里的x值来证明你做到了，但是零知识验证可以让你向别 人证明你做到了这一点，同时不需要透露x的值，即便在看过你的证明之后。 你也可以证明一个如“我知道一个x值，而公式H（x）的结果属于下面这一个集合 {…}”这样的声明。</p>
+<p>密码学承诺好比把一个序列号封装到一个信封里。<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213140941.png" alt=""><br>
+为了将一个零币置于区块链中，需要创建一个铸币交易，其输出地址是零币序列号的一个密码承诺，而铸币交易的输入则是一个基础币，这个基础币也会在创建零币的过程被消耗掉，整个交易过程并 不需要公示这个序列号。<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213141229.png" alt=""></p>
+<h3 id="Zerocoin：匿名性">Zerocoin：匿名性</h3>
+<p>铸币交易或者花费交易中没有展示过r<br>
+无人知道序列号对应哪一个具体的零币</p>
+<h3 id="零钞">零钞</h3>
+<p>零钞使用的是一种被称为zk-SNARKS的密码学技术(Zeroknowledge Succinct Non-interactive Arguments of Knowledge)</p>
+<p>DAP (Decentralized Anonymous Payment Scheme )</p>
+<p>Hiding user identities, transaction amounts, and account balances from public view</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213142134.png" alt=""></p>
+<h1>第10章 另类币和加密货币生态系统</h1>
+<h2 id="目录-6">目录</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>另类币的介绍</p>
+</li>
+<li class="lvl-2">
+<p>不可分割的交叉链呼唤</p>
+</li>
+<li class="lvl-2">
+<p>以太坊和智能合约</p>
+</li>
+</ul>
+<h2 id="另类币的介绍">另类币的介绍</h2>
+<p>Limitation of Bitcoin (High Latency, Low TPS)</p>
+<p>可以对脚本语言进行扩充以增加交易种 类和安全属性</p>
+<p>采用与bitcoin不同的挖矿方式以及共识 算法</p>
+<p>困难的地方在于如何让别人逐步接受你的货币，吸引开发者、矿工 、投资者、商家、客户、支付服务商加入货币的生态圈</p>
+<p>吸引矿工特别重要：没有足够的算力支撑 ，双重支付和复制修改代码就容易发生</p>
+<p>让一个社区的人相信该另类币的价值</p>
+<h2 id="另类币">另类币</h2>
+<p>莱特币（Litecoin）是一种<code>点对点</code>的<code>电子加密货币</code>，也是MIT/X11 许可下的一个开源软件项目。莱特币受到了<code>比特币（BTC）</code>的启 发，并且在技术上具有相同的实现原理，莱特币的创造和转让基 于一种开源的加密协议，不受到任何中央机构的管理。莱特币旨 在改进比特币，与其相比，莱特币具有三种显著差异。第一，莱 特币网路大约每2.5分钟（而不是10分钟）就可以处理一个块，因 此可以提供更快的交易确认。第二，莱特币网路预期产出8400万 个莱特币，是比特币网路发行货币量的四倍之多。第三，莱特币 在其工作量证明算法中使用了由Colin Percival首次提出的scrypt加 密算法，这使得相比于比特币，在普通计算机上进行莱特币挖掘 更为容易（在ASIC矿机诞生之前）</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213151212.png" alt=""><br>
+作为一个开放的区块链网络，Conflux 期望通过去中心化理念及一系列技术创新为未来商业赋能，实现资产和数据互通互信，创建一个更具价值的网络世界。 Conflux 致力于利用自主研发的<code>树图高性能共识算法</code>，构建一个无需准入并拥有极高包容性及延展性的区块链网络。</p>
+<h2 id="10-5-不可分割的交叉链互换">10.5 不可分割的交叉链互换</h2>
+<h3 id="Atomic-Cross-chain-Swap-跨链交易">Atomic Cross-chain Swap (跨链交易)</h3>
+<p>如果爱丽丝想卖掉a个另类币给鲍勃，换得鲍勃的b个比特币，他们可以把这项交易做 成是单一且无法分割的形式吗？</p>
+<p>如果其中一个人，假设是爱丽丝，先执行交易，有什么办法可以阻 止鲍勃不遵守承诺呢？</p>
+<p>有个聪明的办法可以做到，这用到了密码学的承诺和锁定时间存储<br>
+<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230213152431.png" alt=""></p>
+<h2 id="以太坊和智能合约">以太坊和智能合约</h2>
+<p>编程语言（Solidity） 图灵完备</p>
+<p>支持通用的计算功能</p>
+<p>不再局限于数字货币的应用场景 以太坊：一个开源的有智能合约功能的公 共区块链平台，Blockchain 2.0</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>智能合约（smart contract）：存储在区块链上的程序，由各节点运行， 需要运行程序的人支付手续费给节点的矿工或权益人。</p>
+</li>
+<li class="lvl-2">
+<p>代币（tokens）：智能合约可以创造代币供分布式应用程序使用。分布式 应用程序的代币化让用户、投资者以及管理者的利益一致。代币也可以用 来进行首次代币发行。</p>
+</li>
+<li class="lvl-2">
+<p>权益证明（proof-of-stake）：相较于工作量证明更有效率，可节省大量在 挖矿时浪费的电脑资源，并避免特殊应用集成电路造成网络中心化。</p>
+</li>
+<li class="lvl-2">
+<p>燃料（gas）：由交易手续费的概念扩展，在运行各种运算时需计算燃料 消耗量，并缴交燃料费，包括发送以太币或者其他代币也被视为一种运算 动作。</p>
+</li>
+<li class="lvl-2">
+<p>分布式应用程序：以太坊上的分布式应用程序不会停机，也不能被关掉。</p>
+</li>
+<li class="lvl-2">
+<p>叔块（uncle block）：将因为速度较慢而未及时被收入母链的较短区块链 并入，以提升交易量。使用的是有向无环图的相关技术。</p>
+</li>
+</ul>
+<p>以太坊最重要的技术贡献就是<code>智能合约</code>。 智能合约是存储在区块链上的程序</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230214163617.png" alt=""><br>
+交易数据结构</p>
+<h3 id="以太坊中存在三种共识算法：">以太坊中存在三种共识算法：</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Ethash ：是以太坊 1.0 的工作量证明算法</p>
+</li>
+<li class="lvl-2">
+<p>PoA：权威证明算法，服务于测试网、私有链、联盟链等。</p>
+</li>
+<li class="lvl-2">
+<p>PoS：将在以太坊2.0中需要实现的一套股权证明算法</p>
+</li>
+</ul>
+<p>Solidity<br>
+一种静态类型的编程语言，用于开发在 EVM (the runtime environment for smart contracts in Ethereum)上运行的 智能合约。 Solidity被编译为可在EVM上 运行的字节码</p>
+<p>开发平台 Remix，Solidity官方IDE Microsoft Visual Studio</p>
+<h1>作业</h1>
+<h2 id="作业1">作业1</h2>
+<blockquote>
+<p>问题 1：多元 Merkle 树。Alice 可以使用二叉 Merkle 树来提交的一组元素 S = （T1, …, Tn），之后她可以向 Bob 证明 S [i] = Ti，每个证明最多包含⌈log2 n⌉ 个 哈希值。对 S 的承诺是单一的哈希值。在这个问题中，请你解释如何使用 k 叉 树来做同样的事情，也就是说，每个非叶节点最多可以有 k 个子节点。每个非 叶节点的哈希值是其所有子结点的值的哈希值。 a.假设 S ＝（T1,…，T9）。解释 Alice 如何使用三叉 Merkle 树计算对 S 的承诺 （即 k = 3）。Alice 如何向 Bob 证明 T4 在 S 中，即哪些值被包含在证明中？ b.假设 S 包含 n 个元素。S [i] = Ti的证明长度是多大？用 n 和 k 的函数表示。 c.对于较大的 n 值，如果我们想最小化证明的大小，最好使用二叉 Merkle 树还 是三叉 Merkle 树？为什么？</p>
+</blockquote>
+<h3 id="答案">答案</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230214165157.png" alt=""></p>
+<p>(2)采用 Merkle tree 的方法，可以知道成员证明需要 Sibling 的集合，因此假设是 k 叉树，那么所需要的 Hash 数目是  $ 1 + (𝑘 − 1)⌈log_{k}(n)⌉ $ ; （包括根节点）</p>
+<p>(3) n 在渐进意义下，成员证明大小正比于 (k-1)/log(k)。可以知道 1/log(2)&lt; 2/log(3) (也就是 log(3)&lt;2log(2))，因此还是二叉 Merkle 树更好。</p>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230214165324.png" alt=""></p>
+<h2 id="作业2">作业2</h2>
+<blockquote>
+<p>问题 2：<img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230215083703.png" alt=""></p>
+</blockquote>
+<h3 id="答案-2">答案</h3>
+<p><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/20230214165351.png" alt=""></p>
+<h1>破解PDF密码的网站</h1>
+<ol>
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://smallpdf.com/cn/unlock-pdf">https://smallpdf.com/cn/unlock-pdf</a></p>
+</li>
+<li class="lvl-3">
+<p><a target="_blank" rel="noopener" href="https://www.ilovepdf.com/zh-cn">https://www.ilovepdf.com/zh-cn</a></p>
+</li>
+</ol>
+<p>使用方法：把PDF文件拖进去，然后输入密码，即可。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tephrocactushc.github.io">TephrocactusHC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tephrocactushc.github.io/post/e535f34f.html">https://tephrocactushc.github.io/post/e535f34f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tephrocactushc.github.io" target="_blank">TephrocactusHC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/My-Notes/">My Notes</a><a class="post-meta__tags" href="/tags/Pre4APS/">Pre4APS</a><a class="post-meta__tags" href="/tags/knowledge/">knowledge</a><a class="post-meta__tags" href="/tags/BlockChain/">BlockChain</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/dca17261.html"><img class="prev-cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/ylzs.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">娱乐至死</div></div></a></div><div class="next-post pull-right"><a href="/post/2e35672.html"><img class="next-cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/project.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Crypto Term Project</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/20344235.html" title="Computer Network Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Computer Network Knowledge</div></div></a></div><div><a href="/post/abcc0f12.html" title="Database Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Database Knowledge</div></div></a></div><div><a href="/post/70d6b5e4.html" title="Cryptography Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Cryptography Knowledge</div></div></a></div><div><a href="/post/7f08f35c.html" title="Machine Learning Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Machine Learning Knowledge</div></div></a></div><div><a href="/post/37965384.html" title="Data Structures  Knowledge"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/mynotes.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Data Structures  Knowledge</div></div></a></div><div><a href="/post/f071790c.html" title="os knowledge1"><img class="cover" src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/oscover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-18</div><div class="title">os knowledge1</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/doge.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">TephrocactusHC</div><div class="author-info__description">一个懂法律的码农啊</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">56</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/TephrocactusHC"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/TephrocactusHC" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2012026@mail.nankai.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">广告位招租！<br><img src="https://th.bing.com/th/id/R.09d4cfd59642429f00b1f86eb6725a7d?rik=%2b%2fGbHN06bhjZzg&pid=ImgRaw&r=0"></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">第1章 密码学及加密货币概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%AF%86%E7%A0%81%E5%AD%A6%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 密码学哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A2%B0%E6%92%9E%E9%98%BB%E5%8A%9B"><span class="toc-number">2.1.1.</span> <span class="toc-text">碰撞阻力</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E5%A4%84"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">用处</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E7%A7%98%E6%80%A7"><span class="toc-number">2.1.2.</span> <span class="toc-text">隐秘性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%EF%BC%9A%E6%89%BF%E8%AF%BA"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">应用：承诺</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%9C%E9%A2%98%E5%8F%8B%E5%A5%BD"><span class="toc-number">2.1.3.</span> <span class="toc-text">谜题友好</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95-%EF%BC%88Secure-Hash-Algorithm-256%EF%BC%8C%E7%AE%80%E7%A7%B0SHA-256%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">安全哈希算法 （Secure Hash Algorithm 256，简称SHA-256）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E6%8C%87%E9%92%88%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text">哈希指针及数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Merkle-Tree-%E6%A2%85%E5%85%8B%E5%B0%94%E6%A0%91%EF%BC%8C%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91"><span class="toc-number">2.2.1.</span> <span class="toc-text">Merkle Tree 梅克尔树，默克尔树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%B6%E5%B1%9E%E8%AF%81%E6%98%8E"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">隶属证明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E9%9A%B6%E5%B1%9E%E8%AF%81%E6%98%8E"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">非隶属证明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 数字签名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E4%B8%AD%E7%9A%84%E8%80%83%E9%87%8F"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">实践中的考量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%AD%BE%E5%90%8D%E4%B8%8E%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-number">2.3.1.</span> <span class="toc-text">传统签名与数字签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B"><span class="toc-number">2.3.2.</span> <span class="toc-text">加密过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECDSA%E7%AE%97%E6%B3%95"><span class="toc-number">2.3.3.</span> <span class="toc-text">ECDSA算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%85%AC%E9%92%A5%E5%8D%B3%E8%BA%AB%E4%BB%BD"><span class="toc-number">2.4.</span> <span class="toc-text">1.4 公钥即身份</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E8%BA%AB%E4%BB%BD%E7%AE%A1%E7%90%86"><span class="toc-number">2.4.1.</span> <span class="toc-text">去中心化身份管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E4%B8%A4%E7%A7%8D%E7%AE%80%E5%8D%95%E7%9A%84%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81"><span class="toc-number">2.5.</span> <span class="toc-text">1.5 两种简单的加密货币</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%A3%9E%E5%B8%81"><span class="toc-number">2.5.1.</span> <span class="toc-text">高飞币</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%A3%9E%E5%B8%81%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">高飞币的规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E9%A3%9E%E5%B8%81%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">高飞币的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">2.5.1.2.0.1.</span> <span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">2.5.1.2.0.2.</span> <span class="toc-text">优点：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A2%E5%A5%B4%E5%B8%81%EF%BC%88ScroogeCoin%EF%BC%89"><span class="toc-number">2.5.2.</span> <span class="toc-text">财奴币（ScroogeCoin）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%93%8D%E4%BD%9C"><span class="toc-number">2.5.2.1.</span> <span class="toc-text">两种操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%84%E5%88%99"><span class="toc-number">2.5.2.2.</span> <span class="toc-text">规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A2%E5%A5%B4%E5%B8%81%EF%BC%88-ScroogeCoin-%EF%BC%89%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.5.2.3.</span> <span class="toc-text">财奴币（ ScroogeCoin ）优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">2.5.2.3.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A-%E4%B8%AD%E5%BF%83%E5%8C%96"><span class="toc-number">2.5.2.3.2.</span> <span class="toc-text">缺点：(中心化)</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">第2章 比特币如何做到去中心化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">3.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E4%B8%AD%E5%BF%83%E5%8C%96%E4%B8%8E%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96"><span class="toc-number">3.2.</span> <span class="toc-text">2.1 中心化与去中心化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98-%E5%BF%85%E8%80%83"><span class="toc-number">3.2.1.</span> <span class="toc-text">去中心化解决的问题(必考)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%EF%BC%88distributed-consensus%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">2.2 分布式共识（distributed consensus）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.3.1.</span> <span class="toc-text">分布式共识协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E4%B8%8A%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-number">3.3.2.</span> <span class="toc-text">技术上面临的挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E8%83%BD%E6%80%A7%E7%BB%93%E8%AE%BA"><span class="toc-number">3.3.3.</span> <span class="toc-text">不可能性结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E7%A0%B4%E4%BC%A0%E7%BB%9F%E4%B8%8A%E7%9A%84%E5%81%87%E8%AE%BE"><span class="toc-number">3.3.4.</span> <span class="toc-text">打破传统上的假设</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E5%88%B0%E5%BA%95%E6%89%93%E7%A0%B4%E4%BA%86%E7%BB%8F%E5%85%B8%E6%A8%A1%E5%9E%8B%E9%87%8C%E7%9A%84%E5%93%AA%E4%BA%9B%E5%81%87%E8%AE%BE%E5%91%A2%EF%BC%9F"><span class="toc-number">3.3.4.1.</span> <span class="toc-text">比特币到底打破了经典模型里的哪些假设呢？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9D%97%E9%93%BE%E8%BE%BE%E6%88%90%E6%B2%A1%E6%9C%89%E8%BA%AB%E4%BB%BD%E7%9A%84%E5%85%B1%E8%AF%86"><span class="toc-number">3.4.</span> <span class="toc-text">2.3 使用区块链达成没有身份的共识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E6%80%A7%E5%85%B1%E8%AF%86%EF%BC%88inplicit-consensus%EF%BC%89"><span class="toc-number">3.4.1.</span> <span class="toc-text">隐性共识（inplicit consensus）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%94%BB%E5%87%BB"><span class="toc-number">3.4.2.</span> <span class="toc-text">比特币的攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E9%87%8D%E6%94%AF%E4%BB%98"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">双重支付</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%B6%E9%AA%8C%E8%AF%81%E4%BA%A4%E6%98%93-zero-confirmation-transaction"><span class="toc-number">3.4.2.2.</span> <span class="toc-text">零验证交易 (zero confirmation transaction)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%9A%E5%AE%9E%E5%A4%A7%E5%A4%9A%E6%95%B0%E5%8E%9F%E7%90%86"><span class="toc-number">3.4.3.</span> <span class="toc-text">诚实大多数原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%A5%96%E5%8A%B1%E6%9C%BA%E5%88%B6%E4%B8%8E%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E"><span class="toc-number">3.5.</span> <span class="toc-text">2.4 奖励机制与工作量证明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E5%A5%96%E5%8A%B1"><span class="toc-number">3.5.1.</span> <span class="toc-text">区块奖励</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E5%A6%99%E5%92%8C%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%AE%BE%E8%AE%A1-Subtle-but-powerful-trick"><span class="toc-number">3.5.1.1.</span> <span class="toc-text">微妙和强大的设计 (Subtle but powerful trick)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%98%93%E8%B4%B9%E5%A5%96%E5%8A%B1"><span class="toc-number">3.5.2.</span> <span class="toc-text">交易费奖励</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenges"><span class="toc-number">3.5.3.</span> <span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%96%E7%9F%BF%E4%B8%8E%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E"><span class="toc-number">3.5.4.</span> <span class="toc-text">挖矿与工作量证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E8%B0%9C%E9%A2%98%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="toc-number">3.5.5.</span> <span class="toc-text">哈希谜题三大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%BE%E4%BA%8E%E8%AE%A1%E7%AE%97"><span class="toc-number">3.5.5.1.</span> <span class="toc-text">难于计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%8F%82%E6%95%B0%E5%8C%96%E6%88%90%E6%9C%AC"><span class="toc-number">3.5.5.2.</span> <span class="toc-text">可参数化成本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%93%E4%BA%8E%E8%AF%81%E5%AE%9E"><span class="toc-number">3.5.5.3.</span> <span class="toc-text">易于证实</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E6%80%BB%E7%BB%93"><span class="toc-number">3.6.</span> <span class="toc-text">2.5 总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81"><span class="toc-number">3.6.1.</span> <span class="toc-text">启动加密货币</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E6%94%BB%E5%87%BB"><span class="toc-number">3.6.2.</span> <span class="toc-text">51%攻击</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Chapter 3 比特币的运行机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-2"><span class="toc-number">4.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E4%BA%A4%E6%98%93"><span class="toc-number">4.2.</span> <span class="toc-text">3.1 比特币的交易</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">4.2.1.</span> <span class="toc-text">问题？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">4.2.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="toc-number">4.3.</span> <span class="toc-text">3.2 比特币的脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="toc-number">4.3.1.</span> <span class="toc-text">比特币脚本语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OP-RETURN"><span class="toc-number">4.3.2.</span> <span class="toc-text">OP_RETURN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pay-to-Script-Hash-P2SH"><span class="toc-number">4.3.3.</span> <span class="toc-text">Pay-to-Script-Hash P2SH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E6%AF%94%E7%89%B9%E5%B8%81%E8%84%9A%E6%9C%AC%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">4.4.</span> <span class="toc-text">3.3 比特币脚本的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E6%94%AF%E4%BB%98%E4%BA%A4%E6%98%93-%EF%BC%88escrow-transaction%EF%BC%89"><span class="toc-number">4.4.1.</span> <span class="toc-text">第三方支付交易 （escrow transaction）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MultiSig-%EF%BC%88%E5%A4%9A%E9%87%8D%E7%AD%BE%E5%90%8D%EF%BC%89"><span class="toc-number">4.4.1.1.</span> <span class="toc-text">MultiSig （多重签名）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%BF%E8%89%B2%E5%9C%B0%E5%9D%80-%EF%BC%88green-addresses%EF%BC%89"><span class="toc-number">4.4.1.2.</span> <span class="toc-text">绿色地址 （green addresses）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E6%95%88%E5%B0%8F%E9%A2%9D%E6%94%AF%E4%BB%98%EF%BC%88efficient-micro-payments%EF%BC%89"><span class="toc-number">4.4.1.3.</span> <span class="toc-text">高效小额支付（efficient micro-payments）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%81%E5%AE%9A%E6%97%B6%E9%97%B4%EF%BC%88lock-time%EF%BC%89"><span class="toc-number">4.4.1.4.</span> <span class="toc-text">锁定时间（lock_time）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6-Smart-Contract"><span class="toc-number">4.4.2.</span> <span class="toc-text">智能合约 (Smart Contract)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%8C%BA%E5%9D%97"><span class="toc-number">4.5.</span> <span class="toc-text">比特币的区块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%81%E5%9F%BA%E4%BA%A4%E6%98%93-Coinbase-Transaction"><span class="toc-number">4.5.1.</span> <span class="toc-text">币基交易 (Coinbase Transaction)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E6%AF%94%E7%89%B9%E5%B8%81%E7%BD%91%E7%BB%9C"><span class="toc-number">4.6.</span> <span class="toc-text">3.5 比特币网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E9%AA%8C%E6%96%B0%E4%BA%A4%E6%98%93%E4%BF%A1%E6%81%AF"><span class="toc-number">4.6.1.</span> <span class="toc-text">核验新交易信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%9E%E6%80%81%E6%9D%A1%E4%BB%B6-%EF%BC%88race-condition%EF%BC%89"><span class="toc-number">4.6.1.1.</span> <span class="toc-text">竞态条件 （race condition）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E7%9A%84%E4%BC%A0%E6%92%AD%E4%B8%8E%E4%BA%A4%E6%98%93%E4%BC%A0%E6%92%AD%E7%B1%BB%E4%BC%BC"><span class="toc-number">4.6.2.</span> <span class="toc-text">区块的传播与交易传播类似</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%BB%E9%87%8F%E8%8A%82%E7%82%B9-nightweight-nodes-%E4%B9%9F%E5%8F%AB%E7%AE%80%E5%8D%95%E4%BB%98%E6%AC%BE%E9%AA%8C%E8%AF%81-Simple-Payment-Verification"><span class="toc-number">4.6.3.</span> <span class="toc-text">轻量节点(nightweight nodes) 也叫简单付款验证(Simple Payment Verification)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E9%99%90%E5%88%B6%E4%B8%8E%E4%BC%98%E5%8C%96"><span class="toc-number">4.7.</span> <span class="toc-text">3.6 限制与优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Weakness-of-Crypto-Suite"><span class="toc-number">4.7.0.1.</span> <span class="toc-text">Weakness of Crypto Suite</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E8%AE%A2%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.7.1.</span> <span class="toc-text">修订协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E5%88%86%E5%8F%89"><span class="toc-number">4.7.1.1.</span> <span class="toc-text">硬分叉</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E5%88%86%E5%8F%89"><span class="toc-number">4.7.1.2.</span> <span class="toc-text">软分叉</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">第4章 如何储存和使用比特币</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-3"><span class="toc-number">5.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E7%AE%80%E5%8D%95%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-number">5.2.</span> <span class="toc-text">4.1 简单的本地存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E9%92%B1%E5%8C%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">5.2.1.</span> <span class="toc-text">比特币钱包软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%EF%BC%88encoding-keys%EF%BC%89%EF%BC%9ABase58%E7%BC%96%E7%A0%81%E5%92%8C%E4%BA%8C%E7%BB%B4%E7%A0%81"><span class="toc-number">5.2.2.</span> <span class="toc-text">编码解码（encoding keys）：Base58编码和二维码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E8%8D%A3%E5%9C%B0%E5%9D%80-Vanity-Address"><span class="toc-number">5.2.3.</span> <span class="toc-text">虚荣地址 (Vanity Address)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E5%AD%98%E5%82%A8%E5%92%8C%E5%86%B7%E5%AD%98%E5%82%A8"><span class="toc-number">5.3.</span> <span class="toc-text">热存储和冷存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%AD%98%E5%82%A8"><span class="toc-number">5.3.1.</span> <span class="toc-text">热存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B7%E5%AD%98%E5%82%A8"><span class="toc-number">5.3.2.</span> <span class="toc-text">冷存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%92%B1%E5%8C%85%EF%BC%88hierarchical-deterministic-wallet%EF%BC%89"><span class="toc-number">5.3.3.</span> <span class="toc-text">分层确定性钱包（hierarchical deterministic wallet）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%92%B1%E5%8C%85%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88"><span class="toc-number">5.3.4.</span> <span class="toc-text">分层确定性钱包：技术方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%A1%AE%E5%AE%9A%E6%80%A7%E9%92%B1%E5%8C%85%EF%BC%9A%E5%AE%89%E5%85%A8%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">5.3.4.1.</span> <span class="toc-text">分层确定性钱包：安全性分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E8%84%91%E9%92%B1%E5%8C%85-%EF%BC%88brain-walle%EF%BC%89"><span class="toc-number">5.3.5.</span> <span class="toc-text">大脑钱包 （brain walle）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A9%E6%94%BB%E5%87%BB%E8%80%85%E5%B0%9D%E8%AF%95%E5%AF%86%E9%92%A5%E7%A0%B4%E8%A7%A3%E7%9A%84%E9%80%9F%E5%BA%A6%E5%8F%98%E6%85%A2"><span class="toc-number">5.3.5.1.</span> <span class="toc-text">让攻击者尝试密钥破解的速度变慢</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%B8%E9%92%B1%E5%8C%85"><span class="toc-number">5.3.6.</span> <span class="toc-text">纸钱包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%8D%9F%E7%A1%AC%E4%BB%B6%EF%BC%88tamper-resistant-device%EF%BC%89"><span class="toc-number">5.3.7.</span> <span class="toc-text">防损硬件（tamper-resistant device）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E5%AF%86%E9%92%A5%E5%88%86%E5%AD%98%E5%92%8C%E5%AF%86%E9%92%A5%E5%85%B1%E4%BA%AB"><span class="toc-number">5.4.</span> <span class="toc-text">4.3 密钥分存和密钥共享</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%A8%E9%99%90%E5%AF%86%E7%A0%81%EF%BC%88threshold-cryptography%EF%BC%89"><span class="toc-number">5.4.1.</span> <span class="toc-text">门限密码（threshold cryptography）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%87%8D%E7%AD%BE%E5%90%8D%EF%BC%88multisignatures%EF%BC%89"><span class="toc-number">5.4.2.</span> <span class="toc-text">多重签名（multisignatures）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E5%9C%A8%E7%BA%BF%E9%92%B1%E5%8C%85%E5%92%8C%E4%BA%A4%E6%98%93%E6%89%80"><span class="toc-number">5.5.</span> <span class="toc-text">4.4 在线钱包和交易所</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E9%92%B1%E5%8C%85"><span class="toc-number">5.5.1.</span> <span class="toc-text">在线钱包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%EF%BC%88%E6%AF%94%E7%89%B9%E5%B8%81%EF%BC%89%E4%BA%A4%E6%98%93%E6%89%80"><span class="toc-number">5.5.2.</span> <span class="toc-text">数字货币（比特币）交易所</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">5.5.2.1.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E7%AE%A1"><span class="toc-number">5.5.3.</span> <span class="toc-text">监管</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%B6%E8%A1%8C%E7%9B%91%E7%AE%A1"><span class="toc-number">5.5.3.1.</span> <span class="toc-text">银行监管</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E9%87%91%E8%AF%81%E6%98%8E"><span class="toc-number">5.5.3.2.</span> <span class="toc-text">准备金证明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9F%E5%80%BA%E8%AF%81%E6%98%8E%EF%BC%88proof-of-liabilities%EF%BC%89"><span class="toc-number">5.5.3.3.</span> <span class="toc-text">负债证明（proof of liabilities）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E6%94%AF%E4%BB%98%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.6.</span> <span class="toc-text">4.5 支付服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E4%BB%98%E6%AC%BE"><span class="toc-number">5.6.1.</span> <span class="toc-text">如何接受数字货币付款</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E4%BA%A4%E6%98%93%E8%B4%B9"><span class="toc-number">5.7.</span> <span class="toc-text">4.6 交易费</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E7%9A%84%E4%BA%A4%E6%98%93%E8%B4%B9%E6%94%BF%E7%AD%96"><span class="toc-number">5.7.1.</span> <span class="toc-text">默认的交易费政策</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E8%B4%A7%E5%B8%81%E5%85%91%E6%8D%A2%E5%B8%82%E5%9C%BA"><span class="toc-number">5.8.</span> <span class="toc-text">4.7 货币兑换市场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%B8%82%E5%9C%BA%E8%A1%8C%E4%B8%BA%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.8.1.</span> <span class="toc-text">一个简单的市场行为模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">第5章 比特币挖矿（bitcoin mining）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-4"><span class="toc-number">6.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%AF%94%E7%89%B9%E5%B8%81%E7%9F%BF%E5%B7%A5%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="toc-number">6.2.</span> <span class="toc-text">5.1 比特币矿工的任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E6%9C%89%E6%95%88%E5%8C%BA%E5%9D%97"><span class="toc-number">6.2.1.</span> <span class="toc-text">寻找有效区块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E5%AE%9A%E9%9A%BE%E5%BA%A6"><span class="toc-number">6.2.2.</span> <span class="toc-text">决定难度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E6%8C%96%E7%9F%BF%E6%89%80%E9%9C%80%E7%A1%AC%E4%BB%B6"><span class="toc-number">6.3.</span> <span class="toc-text">5.2 挖矿所需硬件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E6%8C%96%E7%9F%BF"><span class="toc-number">6.3.1.</span> <span class="toc-text">CPU挖矿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPU"><span class="toc-number">6.3.2.</span> <span class="toc-text">GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E5%9C%BA%E5%8F%AF%E7%BC%96%E7%A8%8B%E9%97%A8%E9%98%B5%E5%88%97-Field-Programmable-Gate-Array%EF%BC%8C%E7%AE%80%E7%A7%B0FPGA"><span class="toc-number">6.3.3.</span> <span class="toc-text">现场可编程门阵列(Field-Programmable Gate Array，简称FPGA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E7%94%A8%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8C%96%E7%9F%BF-ASIC"><span class="toc-number">6.3.4.</span> <span class="toc-text">专用集成电路技术挖矿 (ASIC)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BB%8A%EF%BC%9A%E4%B8%93%E4%B8%9A%E6%8C%96%E7%9F%BF%E7%9A%84%E5%A4%A9%E4%B8%8B"><span class="toc-number">6.3.5.</span> <span class="toc-text">如今：专业挖矿的天下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5"><span class="toc-number">6.3.6.</span> <span class="toc-text">未来</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E8%83%BD%E6%BA%90%E6%B6%88%E8%80%97%E5%92%8C%E7%94%9F%E6%80%81%E7%8E%AF%E4%BF%9D"><span class="toc-number">6.4.</span> <span class="toc-text">5.3 能源消耗和生态环保</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E8%80%97%E9%A2%84%E4%BC%B0"><span class="toc-number">6.4.1.</span> <span class="toc-text">能耗预估</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E4%B8%8A%E8%80%8C%E4%B8%8B"><span class="toc-number">6.4.1.1.</span> <span class="toc-text">自上而下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E4%B8%8B%E8%80%8C%E4%B8%8A"><span class="toc-number">6.4.1.2.</span> <span class="toc-text">自下而上</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E6%8C%96%E7%9F%BF%E2%80%94%E6%B5%AA%E8%B4%B9%E8%83%BD%E6%BA%90%EF%BC%9F"><span class="toc-number">6.4.2.</span> <span class="toc-text">比特币挖矿—浪费能源？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E6%BA%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BD%BF%E7%94%A8"><span class="toc-number">6.4.3.</span> <span class="toc-text">能源的循环使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E7%94%B5%E5%8A%9B%E8%BD%AC%E6%8D%A2%E6%88%90%E7%8E%B0%E9%87%91"><span class="toc-number">6.4.4.</span> <span class="toc-text">将电力转换成现金</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E7%9F%BF%E6%B1%A0"><span class="toc-number">6.5.</span> <span class="toc-text">5.4 矿池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E7%9F%BF%E5%B7%A5%E7%9A%84%E6%8C%96%E7%9F%BF%E9%A3%8E%E9%99%A9"><span class="toc-number">6.5.1.</span> <span class="toc-text">单个矿工的挖矿风险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%BF%E6%B1%A0%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E7%9F%BF%E5%B7%A5%E4%BA%92%E7%9B%B8%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BF%9D%E9%99%A9"><span class="toc-number">6.5.2.</span> <span class="toc-text">矿池：比特币矿工互相之间的保险</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BA%A2%E6%96%B9%E6%A1%88"><span class="toc-number">6.5.3.</span> <span class="toc-text">分红方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%88%86%E5%88%86%E7%BA%A2"><span class="toc-number">6.5.3.1.</span> <span class="toc-text">工分分红</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E5%AE%9E%E9%99%85%E6%AF%94%E4%BE%8B%E5%88%86%E7%BA%A2"><span class="toc-number">6.5.3.2.</span> <span class="toc-text">按实际比例分红</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%BF%E6%B1%A0%E8%B7%B3%E6%8D%A2"><span class="toc-number">6.5.4.</span> <span class="toc-text">矿池跳换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%9F%BF%E6%B1%A0%E6%96%B9%E6%A1%88%EF%BC%8C%E9%81%BF%E5%85%8D%E7%9F%BF%E5%B7%A5%E7%9A%84%E6%8A%95%E6%9C%BA%EF%BC%9F"><span class="toc-number">6.5.4.1.</span> <span class="toc-text">研究问题：如何设计一个矿池方案，避免矿工的投机？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#51-%E7%9F%BF%E6%B1%A0"><span class="toc-number">6.5.4.2.</span> <span class="toc-text">51%矿池</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9-2"><span class="toc-number">6.5.5.</span> <span class="toc-text">优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-2"><span class="toc-number">6.5.5.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">6.5.5.2.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-%E6%8C%96%E7%9F%BF%E7%9A%84%E6%BF%80%E5%8A%B1%E5%92%8C%E7%AD%96%E7%95%A5"><span class="toc-number">6.6.</span> <span class="toc-text">5.5 挖矿的激励和策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8F%89%E6%94%BB%E5%87%BB-forking-attack"><span class="toc-number">6.6.1.</span> <span class="toc-text">分叉攻击(forking attack)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#51-%E6%98%AF%E5%BF%85%E8%A6%81%E7%9A%84%E5%90%97%EF%BC%9F"><span class="toc-number">6.6.1.1.</span> <span class="toc-text">51%是必要的吗？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%BF%E8%B5%82%E6%94%BB%E5%87%BB"><span class="toc-number">6.6.2.</span> <span class="toc-text">贿赂攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E4%BF%9D%E7%95%99%E5%8C%BA%E5%9D%97%E6%94%BB%E5%87%BB-%E8%87%AA%E7%A7%81%E6%8C%96%E7%9F%BF-%EF%BC%88selfish-mining%EF%BC%89"><span class="toc-number">6.6.3.</span> <span class="toc-text">临时保留区块攻击(自私挖矿)（selfish mining）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%91%E5%90%8D%E5%8D%95%E4%B8%8E%E6%83%A9%E7%BD%9A%E5%88%86%E5%8F%89%E6%94%BB%E5%87%BB"><span class="toc-number">6.6.4.</span> <span class="toc-text">黑名单与惩罚分叉攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BE%BD%E9%87%8F%E7%BA%A7%E5%88%86%E5%8F%89"><span class="toc-number">6.6.5.</span> <span class="toc-text">羽量级分叉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">6.6.6.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">第6章 比特币和匿名性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-5"><span class="toc-number">7.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E5%8C%BF%E5%90%8D%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">7.2.</span> <span class="toc-text">6.1 匿名的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">7.2.1.</span> <span class="toc-text">匿名的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%85%B3%E8%81%94%E6%80%A7"><span class="toc-number">7.2.2.</span> <span class="toc-text">无关联性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%8C%96%E5%92%8C%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96"><span class="toc-number">7.2.3.</span> <span class="toc-text">匿名化和去中心化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E5%A6%82%E4%BD%95%E5%AF%B9%E6%AF%94%E7%89%B9%E5%B8%81%E5%8E%BB%E5%8C%BF%E5%90%8D%E5%8C%96"><span class="toc-number">7.3.</span> <span class="toc-text">6.2 如何对比特币去匿名化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8E%BB%E5%8C%BF%E5%90%8D%E5%8C%96"><span class="toc-number">7.3.1.</span> <span class="toc-text">网络层的去匿名化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E6%B7%B7%E5%B8%81"><span class="toc-number">7.4.</span> <span class="toc-text">6.3 混币</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%B8%81%E5%87%86%E5%88%99"><span class="toc-number">7.4.1.</span> <span class="toc-text">混币准则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B7%B7%E5%B8%81-%EF%BC%88Decentralized-Mixing%EF%BC%89"><span class="toc-number">7.5.</span> <span class="toc-text">6.4 分布式混币 （Decentralized Mixing）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E5%B8%81-%EF%BC%88Coinjoin%EF%BC%89"><span class="toc-number">7.5.1.</span> <span class="toc-text">合币 （Coinjoin）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%A3%8E%E9%99%A9%E4%BA%A4%E6%98%93%E6%B5%81%EF%BC%88high-level-flows%EF%BC%89"><span class="toc-number">7.5.2.</span> <span class="toc-text">高风险交易流（high-level flows）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-%E9%9B%B6%E5%B8%81%E5%92%8C%E9%9B%B6%E9%92%9E"><span class="toc-number">7.6.</span> <span class="toc-text">6.5 零币和零钞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-Zero-Knowledge-Proof"><span class="toc-number">7.6.1.</span> <span class="toc-text">零知识证明(Zero Knowledge Proof)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E%E7%9A%84%E4%B8%80%E8%88%AC%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.6.2.</span> <span class="toc-text">交互式零知识证明的一般模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zerocoin%EF%BC%9A%E5%8C%BF%E5%90%8D%E6%80%A7"><span class="toc-number">7.6.3.</span> <span class="toc-text">Zerocoin：匿名性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%B6%E9%92%9E"><span class="toc-number">7.6.4.</span> <span class="toc-text">零钞</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">第10章 另类币和加密货币生态系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95-6"><span class="toc-number">8.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A6%E7%B1%BB%E5%B8%81%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="toc-number">8.2.</span> <span class="toc-text">另类币的介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A6%E7%B1%BB%E5%B8%81"><span class="toc-number">8.3.</span> <span class="toc-text">另类币</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-%E4%B8%8D%E5%8F%AF%E5%88%86%E5%89%B2%E7%9A%84%E4%BA%A4%E5%8F%89%E9%93%BE%E4%BA%92%E6%8D%A2"><span class="toc-number">8.4.</span> <span class="toc-text">10.5 不可分割的交叉链互换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Atomic-Cross-chain-Swap-%E8%B7%A8%E9%93%BE%E4%BA%A4%E6%98%93"><span class="toc-number">8.4.1.</span> <span class="toc-text">Atomic Cross-chain Swap (跨链交易)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%92%8C%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6"><span class="toc-number">8.5.</span> <span class="toc-text">以太坊和智能合约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%B8%AD%E5%AD%98%E5%9C%A8%E4%B8%89%E7%A7%8D%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-number">8.5.1.</span> <span class="toc-text">以太坊中存在三种共识算法：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">作业</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A1"><span class="toc-number">9.1.</span> <span class="toc-text">作业1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%94%E6%A1%88"><span class="toc-number">9.1.1.</span> <span class="toc-text">答案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A2"><span class="toc-number">9.2.</span> <span class="toc-text">作业2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%94%E6%A1%88-2"><span class="toc-number">9.2.1.</span> <span class="toc-text">答案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">破解PDF密码的网站</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/a28c55f4.html" title="最小危险部门"><img src="/img/law.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="最小危险部门"/></a><div class="content"><a class="title" href="/post/a28c55f4.html" title="最小危险部门">最小危险部门</a><time datetime="2023-04-05T07:27:21.369Z" title="发表于 2023-04-05 15:27:21">2023-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/50dcf957.html" title="权力与意图"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/qlyyt.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="权力与意图"/></a><div class="content"><a class="title" href="/post/50dcf957.html" title="权力与意图">权力与意图</a><time datetime="2023-04-04T05:01:50.000Z" title="发表于 2023-04-04 13:01:50">2023-04-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/78b0f154.html" title="書法審美系列一"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/sffm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="書法審美系列一"/></a><div class="content"><a class="title" href="/post/78b0f154.html" title="書法審美系列一">書法審美系列一</a><time datetime="2023-04-01T13:31:16.000Z" title="发表于 2023-04-01 21:31:16">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/78b0f154.html" title="書法審美系列二"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/sffm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="書法審美系列二"/></a><div class="content"><a class="title" href="/post/78b0f154.html" title="書法審美系列二">書法審美系列二</a><time datetime="2023-04-01T13:31:16.000Z" title="发表于 2023-04-01 21:31:16">2023-04-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/12345678.html" title="OPTEE"><img src="https://raw.githubusercontent.com/TephrocactusHC/mybolgimg/master/sffm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OPTEE"/></a><div class="content"><a class="title" href="/post/12345678.html" title="OPTEE">OPTEE</a><time datetime="2023-04-01T13:31:16.000Z" title="发表于 2023-04-01 21:31:16">2023-04-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By TephrocactusHC</div><div class="footer_custom_text">欢迎来到我的博客！<p><a style="margin-inline:5px"target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px"target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px"target="_blank" href="https://www.jsdelivr.com/"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用 Jsdelivr 为静态资源提供CDN加速" alt="Jsdelivr"></a><a style="margin-inline:5px"target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由 GitHub 托管" alt="GitHub"></a><a style="margin-inline:5px"target="_blank"href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" alt="img" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><script type="text/javascript" src="/js/mouse.js"></script><script type="text/javascript" src="/js/flower.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　<script type="text/javascript" src=""https://cdn.jsdelivr.net/gh/yremp/yremp-js@1.5/sakura.js""></script>　<canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_injector_config();
+  }
+  </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax src="https://npm.elemecdn.com/hexo-butterfly-clock/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>
